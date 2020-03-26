@@ -33,8 +33,16 @@ function createStack(capacity) {
             console.log(arr[i]);
         }
     }
+    // 判断栈是否为空
+    function isEmpty() {
+        return top === -1;
+    }
+    // 读取栈顶元素，不弹出
+    function peek() {
+        return arr[top];
+    }
 
-    return {pop, push, log};
+    return {pop, push, log, isEmpty, peek};
 }
 
 var stack = createStack(5);
@@ -45,3 +53,5 @@ stack.log();
 var topItem = stack.pop();
 console.log(topItem);
 stack.log();
+
+module.exports = createStack;

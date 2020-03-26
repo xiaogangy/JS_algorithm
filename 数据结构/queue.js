@@ -16,7 +16,7 @@ function createQueue(capacity) {
     let front = rear = 0;
 
     // 入队
-    function append(item) {
+    function offer(item) {
         // 当(rear+1)%capacity === front时，队列已满
         if ((rear+1)%capacity === front) {
             throw new Error('队列已满');
@@ -25,7 +25,7 @@ function createQueue(capacity) {
         rear = (rear + 1) % capacity;
     }
     // 出队
-    function pop() {
+    function poll() {
         // 当front和rear
         if(front === rear){
             throw new Error('队列为空');
@@ -40,20 +40,26 @@ function createQueue(capacity) {
             console.log(arr[i]);
         }
     }
+    // 判断队列是否为空
+    function isEmpty() {
+        return front === rear;
+    }
 
-    return {append, pop, log};
+    return {offer, poll, log, isEmpty};
 }
 
 var queue = createQueue(6);
-queue.append(1);
-queue.append(2);
-queue.append(3);
-queue.append(4);
-queue.append(5);
+queue.offer(1);
+queue.offer(2);
+queue.offer(3);
+queue.offer(4);
+queue.offer(5);
 // queue.log();
-// queue.append(6);
-queue.pop();
-queue.pop();
+// queue.offer(6);
+queue.poll();
+queue.poll();
 // queue.log();
-queue.append('lalala');
+queue.offer('lalala');
 queue.log();
+
+module.exports = createQueue;
