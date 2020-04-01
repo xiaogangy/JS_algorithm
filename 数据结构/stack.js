@@ -45,13 +45,13 @@ function createStack(capacity) {
     return {pop, push, log, isEmpty, peek};
 }
 
-var stack = createStack(5);
-stack.push(1);
-stack.push({name: 1});
-stack.push(2);
-stack.log();
-var topItem = stack.pop();
-console.log(topItem);
-stack.log();
+// var stack = createStack(5);
+// stack.push(1);
+// stack.push({name: 1});
+// stack.push(2);
+// stack.log();
+// var topItem = stack.pop();
+// console.log(topItem);
+// stack.log();
 
 module.exports = createStack;
