@@ -17,7 +17,7 @@ function getGreatestCommonDivision(a, b) {
         return small;
     }
     // 递归
-    return getGreatestCommonDivision(big%small, small);
+    return getGreatestCommonDivision(big % small, small);
 }
 
 /**
@@ -32,7 +32,7 @@ function getGreatestCommonDivisionV2(a, b) {
         return small;
     }
     // 递归
-    return getGreatestCommonDivisionV2(big-small, small);
+    return getGreatestCommonDivisionV2(big - small, small);
 }
 
 /**
@@ -48,13 +48,13 @@ function gcd(a, b) {
         return a;
     }
     // 开始判断各种情况
-    if ((a&1) === 0 && (b&1) === 0) {
-        return gcd(a>>1, b>>1)<<1;
-    } else if ((a&1) === 0 && (b&1) === 1) {
-        return gcd(a>>1, b);
-    } else if ((a&1) === 1 && (b&1) === 0) {
-        return gcd(a, b>>1);
-    } else if ((a&1) === 1 && (b&1) === 1) {
+    if ((a & 1) === 0 && (b & 1) === 0) {
+        return gcd(a >> 1, b >> 1) << 1;
+    } else if ((a & 1) === 0 && (b & 1) === 1) {
+        return gcd(a >> 1, b);
+    } else if ((a & 1) === 1 && (b & 1) === 0) {
+        return gcd(a, b >> 1);
+    } else if ((a & 1) === 1 && (b & 1) === 1) {
         let big = a > b ? a : b;
         let small = a < b ? a : b;
         return gcd(big - small, small);

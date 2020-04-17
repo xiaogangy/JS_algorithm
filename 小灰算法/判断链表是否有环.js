@@ -62,8 +62,8 @@ function cycleLength(start) {
  */
 /**
  * 
- * @param {Object} 相遇的节点
- * @param {Object} 头结点 
+ * @param {Object} node 相遇的节点
+ * @param {Object} head 头结点
  */
 function startPoint(node, head) {
     // 相遇位置设置一个指针

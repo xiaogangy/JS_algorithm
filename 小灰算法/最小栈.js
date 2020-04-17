@@ -10,7 +10,7 @@
  */
 
 // 用ES6的class实现
-class stack {
+class Stack {
     // 构造器
     constructor() {
         this.stackA = [];
@@ -18,8 +18,8 @@ class stack {
     }
     // 入栈
     push(data) {
-        const lengthA= this.stackA.length;
-        const lengthB= this.stackB.length;
+        const lengthA = this.stackA.length;
+        const lengthB = this.stackB.length;
         // 1. 如果当前栈A栈B都为空，则表示是插入第一个元素，此时要插入到二者
         // 2. 判断当前插入的元素是否小于栈B栈顶元素，即是否是栈A的最小元素，如果是，则将其同时压入A和B；
         //    否则只插入到栈A
@@ -60,7 +60,7 @@ class stack {
 }
 
 function test() {
-    const s = new stack();
+    const s = new Stack();
     s.push(4);
     s.push(9);
     s.push(7);

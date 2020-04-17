@@ -14,13 +14,13 @@
 
 function findNearsetNumber(number) {
     // 先把整数转为数组，这样方便操作
-    const list = String(number).split('').map(int => parseInt(int));
+    const list = String(number).split('').map(int => parseInt(int, 10));
     const length = list.length;
 
     // 1. 先找逆序区域，找到逆序区域的前一位
     let index = 0;
     for (let i = length - 1; i > 0; i--) {
-        if (list[i] > list[i-1]) {
+        if (list[i] > list[i - 1]) {
             // 注意这里是把逆序区域的起始index传回去了
             index = i;
             break;
@@ -51,7 +51,7 @@ function findNearsetNumber(number) {
         list[m] = temp;
     }
 
-    const ret = parseInt(list.join(''));
+    const ret = parseInt(list.join(''), 10);
     return ret;
 }
 
