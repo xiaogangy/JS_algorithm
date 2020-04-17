@@ -6,11 +6,11 @@
 
 // 二叉树节点
 class TreeNode {
-  constructor(data) {
-    this.data = data;
-    this.leftChild = null;
-    this.rightChild = null;
-  }
+    constructor(data) {
+        this.data = data;
+        this.leftChild = null;
+        this.rightChild = null;
+    }
 }
 
 /**
@@ -26,7 +26,7 @@ function createBinaryTree(inputList) {
 
     let currentData = inputList.shift();
     // 这里判断为空很关键，如果当前元素为空，则不再进行下一步递归
-    if(currentData !== null) {
+    if (currentData !== null) {
         currentNode = new TreeNode(currentData);
         currentNode.leftChild = createBinaryTree(inputList);
         currentNode.rightChild = createBinaryTree(inputList);
@@ -35,7 +35,7 @@ function createBinaryTree(inputList) {
 
 }
 
-// 前序遍历
+// 前序遍历：根 -》 左 -》右
 function preOrderTraverse(rootNode) {
     if (rootNode === null) {
         return;
@@ -45,7 +45,7 @@ function preOrderTraverse(rootNode) {
     preOrderTraverse(rootNode.rightChild);
 }
 
-// 中序遍历
+// 中序遍历：左 -》 根 -》 右
 function inOrderTraverse(rootNode) {
     if (rootNode === null) {
         return;
@@ -55,7 +55,7 @@ function inOrderTraverse(rootNode) {
     inOrderTraverse(rootNode.rightChild);
 }
 
-// 后序遍历
+// 后序遍历：左 -》 右 -》 根
 function postOrderTraverse(rootNode) {
     if (rootNode === null) {
         return;
@@ -65,7 +65,7 @@ function postOrderTraverse(rootNode) {
     console.log(rootNode.data);
 }
 
-function TestFunc() {
+function testFunc() {
     const arr = [3, 2, 9, null, null, 10, null, null, 8, null, 4];
     const binaryTree = createBinaryTree(arr);
 
@@ -76,3 +76,5 @@ function TestFunc() {
     console.log('后序遍历');
     postOrderTraverse(binaryTree);
 }
+
+testFunc();

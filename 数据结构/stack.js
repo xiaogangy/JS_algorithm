@@ -16,8 +16,8 @@ function createStack(capacity) {
         }
         top++;
         arr[top] = item;
-
     }
+
     // 出栈
     function pop() {
         if (top === -1) {
@@ -27,16 +27,21 @@ function createStack(capacity) {
         top--;
         return topItem;
     }
+
     // 打印栈中所有元素，从栈底到栈顶，从左往右，符合习惯
     function log() {
+        const temp = [];
         for (let i = 0; i <= top; i++) {
-            console.log(arr[i]);
+            temp.push(arr[i]);
         }
+        console.log(temp.join(','));
     }
+
     // 判断栈是否为空
     function isEmpty() {
         return top === -1;
     }
+
     // 读取栈顶元素，不弹出
     function peek() {
         return arr[top];

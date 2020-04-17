@@ -10,35 +10,15 @@ function Node(data) {
 
 // Linked-List
 // 操作应该放到原型链上
-// function LinkedList_simple() {
-// 	this.head = null;
-// 	// 插入
-// 	this.insert = function(index, node) {
-
-// 	};
-// 	// 查找
-// 	this.get = function(index) {
-
-// 	};
-// 	// 删除
-// 	this.delete = function(index) {
-
-// 	};
-// 	// 更改
-// 	this.modify = function(index, data) {
-
-// 	}
-// }
-
 function LinkedList() {
-	this.head = null;
+    this.head = null;
 	// 为了方便查找，增加一个last指针
-	this.last = null;
-	this.size = 0;
+    this.last = null;
+    this.size = 0;
 }
 
 // 插入
-LinkedList.prototype.insert = function(index, data) {
+LinkedList.prototype.insert = function (index, data) {
     if (index < 0 || index > this.size) {
         throw new Error('插入位置不合法');
     }
@@ -49,7 +29,7 @@ LinkedList.prototype.insert = function(index, data) {
         this.last = node;
     } else if (index === this.size) {
         // 队尾插入
-		this.last.next = node;
+        this.last.next = node;
         this.last = node;
 	} else if (index === 0) {
         // 插入到头部
@@ -65,19 +45,19 @@ LinkedList.prototype.insert = function(index, data) {
     this.size++;
 };
 // 查找
-LinkedList.prototype.get = function(index) {
+LinkedList.prototype.get = function (index) {
     if (index < 0 || index > this.size) {
-        throw new Error('位置不存在')
+        throw new Error('位置不存在');
     }
-    const ret = this.head;
+    let ret = this.head;
     for (let i = 0; i < index; i++) {
         ret = ret.next;
     }
     return ret;
 };
 // 删除
-LinkedList.prototype.delete = function(index) {
-    if(index < 0 || index >= this.size) {
+LinkedList.prototype.delete = function (index) {
+    if (index < 0 || index >= this.size) {
         throw new Error('位置不存在');
     }
     if (this.size === 1) {
@@ -86,7 +66,7 @@ LinkedList.prototype.delete = function(index) {
     } else if (index === 0) {
         // 删除头部元素
         this.head = this.head.next;
-    } else if(index === this.size - 1) {
+    } else if (index === this.size - 1) {
         // 删除队尾元素
         const pre = this.get(index - 1);
         pre.next = null;
@@ -102,23 +82,23 @@ LinkedList.prototype.delete = function(index) {
     this.size--;
 };
 // 更改
-LinkedList.prototype.modify = function(index, data) {
-    if(index < 0 || index >= this.size) {
+LinkedList.prototype.modify = function (index, data) {
+    if (index < 0 || index >= this.size) {
         throw new Error('位置不存在');
     }
     const node = this.get(index);
     node.data = data;
 };
 // 输出
-LinkedList.prototype.output = function() {
+LinkedList.prototype.output = function () {
     let current = this.head;
-    const allData = []
+    const allData = [];
     for (let i = 0; i < this.size; i++) {
         allData.push(current.data);
         current = current.next;
     }
-    console.log(allData.join());
-}
+    console.log(allData.join('->'));
+};
 
 const L = new LinkedList();
 L.insert(0, 1);

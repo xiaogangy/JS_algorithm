@@ -8,11 +8,11 @@ const createQueue = require('./queue');
 
 // 节点，用链表实现
 class TreeNode {
-  constructor(data) {
-    this.data = data;
-    this.leftChild = null;
-    this.rightChild = null;
-  }
+    constructor(data) {
+        this.data = data;
+        this.leftChild = null;
+        this.rightChild = null;
+    }
 }
 
 // 构建二叉树
@@ -59,7 +59,7 @@ function inOrderTraverse(rootNode) {
     let currentNode = rootNode;
 
     while (currentNode !== null || !stack.isEmpty()) {
-        while(currentNode !== null) {
+        while (currentNode !== null) {
             // 先入栈，出栈的时候再输出
             stack.push(currentNode);
             currentNode = currentNode.leftChild;
@@ -67,7 +67,7 @@ function inOrderTraverse(rootNode) {
         if (!stack.isEmpty()) {
             currentNode = stack.pop();
             console.log(currentNode.data);
-            currentNode = currentNode.rightChild
+            currentNode = currentNode.rightChild;
         }
     }
 }
@@ -75,30 +75,26 @@ function inOrderTraverse(rootNode) {
 // 后序遍历：左节点 -> 右节点 -> 根节点
 // 后序遍历的非递归版本是最为复杂的，要保证节点的左右子节点都已经访问过，才能弹出栈顶元素
 function postOrderTraverse(rootNode) {
-   const stack = createStack(20);
-   let currentNode = rootNode;
-   // 标志位
-   let lastVisited = null;
+    const stack = createStack(20);
+    let currentNode = rootNode;
+    // 标志位
+    let lastVisited = null;
 
-   while (currentNode !== null || !stack.isEmpty()) {
-       while(currentNode !== null) {
-           // 先入栈，出栈的时候再输出
-           stack.push(currentNode);
-           currentNode = currentNode.leftChild;
-       }
+    while (currentNode !== null || !stack.isEmpty()) {
+        while (currentNode !== null) {
+            // 先入栈，出栈的时候再输出
+            stack.push(currentNode);
+            currentNode = currentNode.leftChild;
+        }
 
-       const parentNode = stack.peek();
-       if (parentNode.rightChild === null || parentNode.rightChild === lastVisited) {
-           console.log(stack.pop().data);
-           lastVisited = parentNode;
-           // 注意此时这个currentNode设置为null，是为了想跳过上面的内层while循环；
-           // 实际上是表示当前节点已经被访问过，它作为某个节点的左节点已经访问了，应该转向它的相邻节点，即它的父节点的右子节点
-           currentNode = null;
-       } else {
-           currentNode = parentNode.rightChild;
-       }
-
-   }
+        const parentNode = stack.peek();
+        if (parentNode.rightChild === null || parentNode.rightChild === lastVisited) {
+            console.log(stack.pop().data);
+            lastVisited = parentNode;
+        } else {
+            currentNode = parentNode.rightChild;
+        }
+    }
 }
 
 // 层序遍历
