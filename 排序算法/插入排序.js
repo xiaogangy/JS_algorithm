@@ -10,6 +10,7 @@
 function insertSort(arr) {
     const length = arr.length;
     // 外层循环控制当前要找合适位置的元素索引
+    // 一个元素时，默认有序
     for (let i = 1; i < length; i++) {
         // 记录当前要进行找位置的元素
         let current = arr[i];

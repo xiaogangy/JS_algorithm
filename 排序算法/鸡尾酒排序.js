@@ -9,17 +9,17 @@
 
 function cocktailSort(arr) {
     const length = arr.length;
-    for (let i = 0; i < Math.floor(length/2); i++) {
+    for (let i = 0; i < Math.floor(length / 2); i++) {
 
         let isSorted = true;
         // 先进行从左到右，筛选最大元素
         for (let j = i; j < length - i - 1; j++) {
-            if(arr[j] > arr[j+1]) {
-                let temp = arr[j+1];
-                arr[j+1] = arr[j];
+            if (arr[j] > arr[j + 1]) {
+                let temp = arr[j + 1];
+                arr[j + 1] = arr[j];
                 arr[j] = temp;
                 // 有元素交换，所以不是有序的，设置为false
-                isSorted = false
+                isSorted = false;
             }
         }
         if (isSorted) {
@@ -29,12 +29,12 @@ function cocktailSort(arr) {
         // 从右往左，筛选最小元素，此时需要重置isSorted的值
         isSorted = true;
         for (let j = length - i - 1; j > i; j--) {
-            if(arr[j] < arr[j-1]) {
-                let temp = arr[j-1];
-                arr[j-1] = arr[j];
+            if (arr[j] < arr[j - 1]) {
+                let temp = arr[j - 1];
+                arr[j - 1] = arr[j];
                 arr[j] = temp;
                 // 有元素交换，所以不是有序的，设置为false
-                isSorted = false
+                isSorted = false;
             }
         }
         if (isSorted) {

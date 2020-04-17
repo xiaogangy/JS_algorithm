@@ -10,7 +10,8 @@
  */
 
 // 双边循环法
-// 设立左右两个'指针'，左指针从左往右扫描，遇到小于或者等于基准元素的就继续向右移动一位，遇到比基准元素大的，就暂停；右指针从右往左扫描数组，遇到比基准元素大的就左移一位，遇到相等的或者小于基准元素的元素，就暂停；此时交换左指针和右指针指向的两个元素，然后继续进行前面的步骤；一直进行到左右指针相遇，则说明扫描完一遍，此时将基准元素与这时候的指针指向的元素进行交换，完成第一轮扫描。然后对基准元素左右两边两个子序列仔进行同样的操作……
+// 设立左右两个'指针'，左指针从左往右扫描，遇到小于或者等于基准元素的就继续向右移动一位，遇到比基准元素大的，就暂停；右指针从右往左扫描数组，遇到比基准元素大的就左移一位，遇到相等的或者小于基准元素的元素，就暂停；
+// 此时交换左指针和右指针指向的两个元素，然后继续进行前面的步骤；一直进行到左右指针相遇，则说明扫描完一遍，此时将基准元素与这时候的指针指向的元素进行交换，完成第一轮扫描。然后对基准元素左右两边两个子序列仔进行同样的操作。
 // 第一版:
 function quickSort_draft(arr, startIndex, endIndex) {
     let left = startIndex;
@@ -22,10 +23,10 @@ function quickSort_draft(arr, startIndex, endIndex) {
     }
     // 进行双边循环
     while (left < right) {
-        while(arr[left] <= pivot) {
+        while (arr[left] <= pivot) {
             left++;
         }
-        while(arr[right] > pivot) {
+        while (arr[right] > pivot) {
             right--;
         }
         if (left < right) {
@@ -34,12 +35,12 @@ function quickSort_draft(arr, startIndex, endIndex) {
             arr[left] = temp;
         }
     }
-   arr[startIndex] = arr[left - 1];
-   arr[left - 1] = pivot;
-   // 左子序列
-   quickSort(arr, startIndex, left - 2);
-   // 右子序列
-   quickSort(arr, left, endIndex);
+    arr[startIndex] = arr[left - 1];
+    arr[left - 1] = pivot;
+    // 左子序列
+    quickSort(arr, startIndex, left - 2);
+    // 右子序列
+    quickSort(arr, left, endIndex);
 }
 
 /**
@@ -68,11 +69,11 @@ function partition(arr, startIndex, endIndex) {
     let right = endIndex;
     let pivot = arr[startIndex];
     // 进行双边循环，当左右指针相遇时停止循环
-    while (left != right) {
-        while(left < right && arr[right] > pivot) {
+    while (left !== right) {
+        while (left < right && arr[right] > pivot) {
             right--;
         }
-        while(left < right && arr[left] <= pivot) {
+        while (left < right && arr[left] <= pivot) {
             left++;
         }
         if (left < right) {
@@ -81,10 +82,10 @@ function partition(arr, startIndex, endIndex) {
             arr[left] = temp;
         }
     }
-   arr[startIndex] = arr[left];
-   arr[left] = pivot;
-   // 返回pivotIndex，方便迭代
-   return left;
+    arr[startIndex] = arr[left];
+    arr[left] = pivot;
+    // 返回pivotIndex，方便迭代
+    return left;
 }
 
 /**
@@ -116,11 +117,11 @@ function quickSort_2(arr, startIndex, endIndex) {
 function partition_2(arr, startIndex, endIndex) {
     // 基准值
     let pivot = arr[startIndex];
-    // 定义mark变量，用来追踪小于基准值的最低
+    // 定义mark变量，用来追踪小于基准值的最后一个元素
     let mark = startIndex;
     for (let i = startIndex + 1; i <= endIndex; i++) {
         // 当遍历的元素小于基准元素时，要交换
-        if(arr[i] < pivot) {
+        if (arr[i] < pivot) {
             mark++;
             let temp = arr[i];
             arr[i] = arr[mark];
@@ -171,7 +172,7 @@ function quickSort_stack(arr, startIndex, endIndex) {
 
 function testFunc() {
     const arr = [4, 4, 6, 5, 3, 2, 8, 1];
-    quickSort_stack(arr, 0, arr.length - 1);
+    quickSort_2(arr, 0, arr.length - 1);
     console.log('排序后', arr);
 }
 

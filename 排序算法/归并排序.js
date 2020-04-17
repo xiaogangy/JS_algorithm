@@ -12,16 +12,16 @@
  */
 
 function mergeSort(arr) {
-   const length = arr.length;
-   // 老规矩：递归先写终止条件
-   if (length < 2) {
-       return arr;
-   }
-   const pivotIndex = Math.floor(length/2);
-   // 左右两个子序列
-   const left = arr.slice(0, pivotIndex);
-   const right = arr.slice(pivotIndex, length);
-   return merge(mergeSort(left), mergeSort(right));
+    const length = arr.length;
+    // 老规矩：递归先写终止条件
+    if (length < 2) {
+        return arr;
+    }
+    const pivotIndex = Math.floor(length / 2);
+    // 左右两个子序列
+    const left = arr.slice(0, pivotIndex);
+    const right = arr.slice(pivotIndex, length);
+    return merge(mergeSort(left), mergeSort(right));
 }
 
 /**
@@ -43,10 +43,10 @@ function merge(leftArr, rightArr) {
         }
     }
     // 需要判断左右哪个数组还有剩余元素，将其完整插入到result的尾部
-    while(leftArr.length > 0) {
+    while (leftArr.length > 0) {
         result.push(leftArr.shift());
     }
-    while(rightArr.length > 0) {
+    while (rightArr.length > 0) {
         result.push(rightArr.shift());
     }
     return result;

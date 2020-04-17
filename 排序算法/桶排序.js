@@ -19,9 +19,9 @@ function bubbleSort(arr) {
     const length = arr.length;
     for (let i = 0; i < length - 1; i++) {
         for (let j = 0; j < length - i - 1; j++) {
-            if (arr[j] > arr[j+1]) {
-                const temp = arr[j+1];
-                arr[j+1] = arr[j];
+            if (arr[j] > arr[j + 1]) {
+                const temp = arr[j + 1];
+                arr[j + 1] = arr[j];
                 arr[j] = temp;
             }
         }
@@ -39,10 +39,10 @@ function bucketSort(arr) {
     let max = arr[0];
     let min = arr[0];
     for (let i = 0; i < length; i++) {
-        if(arr[i] > max) {
+        if (arr[i] > max) {
             max = arr[i];
         }
-        if(arr[i] < min) {
+        if (arr[i] < min) {
             min = arr[i];
         }
     }

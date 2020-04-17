@@ -2,7 +2,7 @@
  * @file 计数排序
  * 描述：计数排序是一种时间复杂度为线性的算法，适用对象为数组中值全为整数的排序，通过利用数组的下标来实现
  * 时间复杂度：O(n)
- * 空间复杂度：O(m)-m为数组最大值和最小值的差
+ * 空间复杂度：O(m) -- m为数组最大值和最小值的差
  */
 
 function countSort(arr) {
@@ -11,7 +11,7 @@ function countSort(arr) {
     let max = arr[0];
     let min = arr[0];
     for (let index = 1; index < length; index++) {
-        if(arr[index] > max) {
+        if (arr[index] > max) {
             max = arr[index];
         }
         if (arr[index] < min) {

@@ -11,7 +11,7 @@
 function heapSort(arr) {
     const length = arr.length;
     // 1.构建二叉堆(从最后一个非叶子节点开始，依次进行下沉操作)
-    for (let i = Math.floor((length - 2)/2); i >= 0; i--) {
+    for (let i = Math.floor((length - 2) / 2); i >= 0; i--) {
         downAdjust(arr, i, length);
     }
     // 依次删除堆顶元素，放到队尾
@@ -37,7 +37,7 @@ function downAdjust(arr, parentIndex, length) {
     // 保存父节点的值，用于后续比较
     let temp = arr[parentIndex];
     let childIndex = 2 * parentIndex + 1;
-    while(childIndex < length) {
+    while (childIndex < length) {
         // 如果有右孩子，且右孩子的值大于左孩子的值，则定位到右孩子
         if (childIndex + 1 < length && arr[childIndex + 1] > arr[childIndex]) {
             childIndex++;

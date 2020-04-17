@@ -28,7 +28,7 @@ function selectSort(arr) {
 }
 
 // 选最小
-function selectSort_min(arr) {
+function selectSortMin(arr) {
     const length = arr.length;
     // 外层循环控制轮数，每一轮选出一个最大值
     for (let i = 0; i < length - 1; i++) {
@@ -48,5 +48,5 @@ function selectSort_min(arr) {
 
 function testFunc() {
     const arr = [2, 4, 5, 1, 6, 9, 7, 8];
-    console.log(selectSort_min(arr));
+    console.log(selectSortMin(arr));
 }

@@ -13,7 +13,7 @@
 function shellSort(arr) {
     // 关于增量序列的选择：采用最简单的选择方式，Math.floor(length/2)
     let length = arr.length;
-    for (let gap = Math.floor(length/2); gap > 0; gap = Math.floor(gap/2)) {
+    for (let gap = Math.floor(length / 2); gap > 0; gap = Math.floor(gap / 2)) {
         // 从第一个符合增量长度的元素开始进行对比
         for (let i = gap; i < length; i++) {
             // 当前要进行插入排序的元素
@@ -21,7 +21,7 @@ function shellSort(arr) {
             // j用来记录小于当前元素指定增量的元素索引
             let j = i;
             // 注意：这里只和自己差增量序列大小的元素进行比较；使用的是插入排序
-            while(j - gap >= 0 && current < arr[j - gap]) {
+            while (j - gap >= 0 && current < arr[j - gap]) {
                 arr[j] = arr[j - gap];
                 j = j - gap;
             }
