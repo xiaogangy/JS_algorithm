@@ -43,9 +43,9 @@ function removeKDigits(number, k) {
                 break;
             }
         }
-        // 如果没有找到要删除的数字，即当前整数为完整顺序的，删除最后一位即可
+        // 如果没有找到要删除的数字，即当前整数为完全顺序的，删除最后一位即可
         if (!hasCut) {
-            arr.splice(arr.length - 1, 1);
+            arr.pop();
         }
     }
 

@@ -33,7 +33,7 @@ function findNearsetNumber(number) {
 
     // 2. 找到逆序区域中大于刚刚好大于待交换元素的值，交换二者
     const comparedValue = list[index - 1];
-    for (let j = length - 1; j > 0; j--) {
+    for (let j = length - 1; j > (index - 1); j--) {
         if (list[j] > comparedValue) {
             list[index - 1] = list[j];
             list[j] = comparedValue;
