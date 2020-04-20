@@ -19,6 +19,7 @@ function createBitmap(size) {
     const capacity = size;
     // words是一个数组，数组中存储的都是number类型，一个number类型占64位，所以bitmap就是64+64+64……这么多位
     // 根据谷歌EWAH的习惯，我们把一个64位称之为一个word
+    // 这里getWordIndex的参数要减1的原因是，最低位是从0开始的，所以64位bitmap所能表示的最大整数为63
     const words = new Array(getWordIndex(size - 1) + 1).fill(0);
 
     /**
