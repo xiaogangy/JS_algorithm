@@ -9,6 +9,7 @@
 
 function cocktailSort(arr) {
     const length = arr.length;
+    // 注意：JS中没有整数的概念，因此也没有除法自动取整的结果，想要达到JAVA中的效果，用Math.floor
     for (let i = 0; i < Math.floor(length / 2); i++) {
 
         let isSorted = true;
@@ -26,6 +27,7 @@ function cocktailSort(arr) {
             break;
         }
 
+        // 既然能走到这儿，说明上面肯定有元素进行交换了
         // 从右往左，筛选最小元素，此时需要重置isSorted的值
         isSorted = true;
         for (let j = length - i - 1; j > i; j--) {

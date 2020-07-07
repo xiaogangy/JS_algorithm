@@ -111,6 +111,8 @@ function testFunc() {
     console.log(optRemoveKDigits(15531, 1));
     console.log(removeKDigits(123456, 1));
     console.log(optRemoveKDigits(123456, 1));
+    console.log(removeKDigits(28942, 2));
+    console.log(optRemoveKDigits(28942, 2));
 }
 
 testFunc();

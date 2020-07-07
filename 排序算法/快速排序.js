@@ -5,7 +5,7 @@
  * 实现：快排必须掌握递归和非递归两个版本的实现，按照思路的不同还可以分为双边循环法和单边循环法
  * 基准元素的选择：一般推荐随机选择数组中的一个元素作为基准元素，这样可以减少极端情况的发生。本文为了方便，选择了数组第一个元素作为基准
  * 平均时间复杂度：O(nlogn)
- * 最坏时间复杂度：O(n^2)  在数组完全逆序下触发
+ * 最坏时间复杂度：O(n^2)  在数组完全逆序或者完全有序下触发
  * 空间复杂度：O(logn) 主要是递归造成的栈空间
  */
 
@@ -23,10 +23,10 @@ function quickSort_draft(arr, startIndex, endIndex) {
     }
     // 进行双边循环
     while (left < right) {
-        while (arr[left] <= pivot) {
+        while (left < right && arr[left] <= pivot) {
             left++;
         }
-        while (arr[right] > pivot) {
+        while (left < right && arr[right] > pivot) {
             right--;
         }
         if (left < right) {
@@ -90,7 +90,7 @@ function partition(arr, startIndex, endIndex) {
 
 /**
  * 单向循环法：
- * 思路：双边循环法是用了左右两个指针来进行数组拆分。单边循环法只设立一个左边一个指针mark，用来追踪比基准元素小的值的区域边界。
+ * 思路：双边循环法是用了左右两个指针来进行数组拆分。单边循环法只设立一个左指针mark，用来追踪比基准元素小的值的区域边界。
  * 具体实现：
  * - 如果遍历到的元素大于等于基准元素，就继续向后遍历
  * - 如果遍历到的元素小于基准元素，要做两件事：
@@ -123,6 +123,10 @@ function partition_2(arr, startIndex, endIndex) {
         // 当遍历的元素小于基准元素时，要交换
         if (arr[i] < pivot) {
             mark++;
+            // 避免无意义的的交换
+            if (mark === i) {
+                continue;
+            }
             let temp = arr[i];
             arr[i] = arr[mark];
             arr[mark] = temp;
@@ -137,8 +141,9 @@ function partition_2(arr, startIndex, endIndex) {
 
 // 非递归版本的实现
 // 思路：递归的特点是回溯，所以一般情况下，递归的算法也可以通过栈结构进行实现
+// 2020.7.7：下面这个写法，跟栈没多大关系，因为快排本身不涉及左右子序列谁先排谁后排的顺序，这里用队列也可以
 // 实现：partition的代码不用动，只用改sort中的递归结构
-const createStack = require('../数据结构/stack');
+const createStack = require('../数据结构/栈与队列/stack');
 function quickSort_stack(arr, startIndex, endIndex) {
     if (startIndex >= endIndex) {
         return;
@@ -172,7 +177,7 @@ function quickSort_stack(arr, startIndex, endIndex) {
 
 function testFunc() {
     const arr = [4, 4, 6, 5, 3, 2, 8, 1];
-    quickSort_2(arr, 0, arr.length - 1);
+    quickSort(arr, 0, arr.length - 1);
     console.log('排序后', arr);
 }
 
