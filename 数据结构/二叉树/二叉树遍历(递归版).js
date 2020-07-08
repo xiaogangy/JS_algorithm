@@ -15,7 +15,8 @@ class TreeNode {
 
 /**
  * 事实上，二叉树的前序、中序和后序序列中的任何一个都不能唯一确定一棵二叉树，想要确定唯一的二叉树结构，需要根据前序+中序或者中序+后序来确定
- * 这里只是根据前序遍历构建一种可能的二叉树
+ * 但是！如果你在序列化二叉树的时候，把空节点也保存了，那就可以唯一反序列化一棵二叉树了，因为我们遇到null值，就知道到了叶子节点了嘛……
+ * 这里是根据一个前序遍历序列反序列化出来的唯一二叉树
  */
 function createBinaryTree(inputList) {
     // 用来track二叉树或其子树的头结点
@@ -37,6 +38,7 @@ function createBinaryTree(inputList) {
 
 // 前序遍历：根 -》 左 -》右
 function preOrderTraverse(rootNode) {
+    // 即是健壮性判断，也是递归的出口
     if (rootNode === null) {
         return;
     }

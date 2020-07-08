@@ -16,6 +16,8 @@
  */
 function upAdjust(list) {
     let childIndex = list.length - 1;
+    // 为什么这里会是(childIndex - 1)/2呢，分析一下规律就知道了
+    // 因为二叉堆本身是一个完全二叉树，当前节点如果是父节点的左子节点，那么index肯定是奇数，同理，右节点肯定是偶数
     let parentIndex = Math.floor((childIndex - 1) / 2);
     // 保存待调整节点的值
     let temp = list[childIndex];
@@ -67,7 +69,7 @@ function downAdjust(list, parentIndex, length) {
  * @return {[type]}      [description]
  */
 function buildBinaryHeap(list) {
-    for (let i = Math.floor((list.length - 2) / 2); i >= 0; i--) {
+    for (let i = Math.floor((list.length - 1 - 1) / 2); i >= 0; i--) {
         downAdjust(list, i, list.length);
     }
 }

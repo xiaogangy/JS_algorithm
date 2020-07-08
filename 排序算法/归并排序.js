@@ -14,6 +14,7 @@
 function mergeSort(arr) {
     const length = arr.length;
     // 老规矩：递归先写终止条件
+    // 如果数组只有一个元素或者空，自然不用排序
     if (length < 2) {
         return arr;
     }

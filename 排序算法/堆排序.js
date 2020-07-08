@@ -15,7 +15,7 @@ function heapSort(arr) {
         downAdjust(arr, i, length);
     }
     // 依次删除堆顶元素，放到队尾
-    // i用来记录无序堆的长度
+    // i用来记录无序堆的长度，其实也是循环的次数
     for (let i = length - 1; i > 0; i--) {
         // 第一个元素和最后一个元素交换
         let temp = arr[i];

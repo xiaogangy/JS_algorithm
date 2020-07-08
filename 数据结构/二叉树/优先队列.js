@@ -24,7 +24,7 @@ class PriorityQueue {
     }
 
     // 出队操作
-    // 先把头部和尾部元素交换一下，然后做下沉操作
+    // 把尾部元素放到头部位置，然后做下沉操作
     deQueue() {
         if (this.size === 0) {
             throw new Error('队列为空');
@@ -69,7 +69,7 @@ class PriorityQueue {
             if (childIndex + 1 < length && list[childIndex] < list[childIndex + 1]) {
                 childIndex++;
             }
-            // 如果两个孩子都比父节点大，则直接退出
+            // 如果两个孩子都比父节点小，则直接退出
             if (list[childIndex] <= temp) {
                 break;
             } else {

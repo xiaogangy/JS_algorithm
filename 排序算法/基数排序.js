@@ -19,7 +19,7 @@ function radixSort(arr) {
     }
     // 表示序列里的最大数，最多有这么多位
     const maxDigit = String(max).length;
-    // 使用计数排序进行统计
+    // 使用计数排序进行统计，这是设置为10位，是十进制的原因，数字只有可能是0~9
     const countArr = new Array(10).fill(0).map(() => ([]));
     // 进行取余和截断操作
     let mod = 10;
@@ -27,7 +27,7 @@ function radixSort(arr) {
     for (let i = 0; i < maxDigit; i++, dev *= 10, mod *= 10) {
         // 2. 取出数组中每个值的这一位，进行计数排序
         for (let j = 0; j < length; j++) {
-            // 对应位上的值
+            // 对应位上的值，位数不够的，自然那一位得到的值就是0
             let value = Math.floor((arr[j] % mod) / dev);
             countArr[value].push(arr[j]);
         }
