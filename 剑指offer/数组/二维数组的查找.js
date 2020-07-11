@@ -23,6 +23,7 @@ function Find(target, array) {
         return false;
     }
 
+    // 取右上角作为判断点
     let row = 0;
     let column = columns - 1;
     // 循环终止条件，直到缩减到左下角
