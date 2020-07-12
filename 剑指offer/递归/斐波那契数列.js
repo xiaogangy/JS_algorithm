@@ -1,6 +1,6 @@
 /**
  * @desc 斐波那契数列指的是这样一串数列，0,1,1,2,3,5,8……，这些数列的规则是后一个数是前两个数字之和
- * 现在要去输入一个整数n，输出斐波那契数列的第n项
+ * 现在要求输入一个整数n，输出斐波那契数列的第n项
  */
 
 
@@ -16,7 +16,7 @@ function Fibonacci(n) {
         return 0;
     }
     if (n === 1) {
-        return 1
+        return 1;
     }
     return Fibonacci(n - 1) + Fibonacci(n - 2);
 
@@ -31,7 +31,7 @@ function Fibonacci_noRecursive(n) {
         return 0;
     }
     if (n === 1) {
-        return 1
+        return 1;
     }
 
     let first = 0;

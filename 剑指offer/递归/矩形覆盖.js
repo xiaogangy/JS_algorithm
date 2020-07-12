@@ -1,5 +1,6 @@
 /**
  * @desc 我们可以用2*1的小矩形横着或者竖着去覆盖更大的矩形。请问用n个2*1的小矩形无重叠地覆盖一个2*n的大矩形，总共有多少种方法？
+ *
  * 思路：我们把长度为n的大矩形的覆盖方法记为f(n)，用第一个小矩形去覆盖大矩形的最左边时，有两种选择，可以横着放，也可以竖着放，这样会产生两种结果。
  * - 当横着放的时候，第二行最左边也必须同样放一个小矩形，这时候剩余的大矩形为2*(n-2)，因此问题转化为求f(n-2)；
  * - 当竖着放时，剩余大矩形为2*(n-1)，问题转化为求f(n-1)。
@@ -23,7 +24,7 @@ function rectCover(number) {
     let first = 1;
     let second = 2;
     let current = 0;
-    for(let i = 3; i <= number; i++) {
+    for (let i = 3; i <= number; i++) {
         current = first + second;
         first = second;
         second = current;
