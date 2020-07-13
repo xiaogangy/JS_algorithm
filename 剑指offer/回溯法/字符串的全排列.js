@@ -13,6 +13,8 @@
  * 剩余的字符进行全排列。接下来就是代码了……
  */
 
+
+// 第一版：
 function Permutation(str) {
     if (!str) {
         return [];
@@ -20,7 +22,7 @@ function Permutation(str) {
     let result = [];
     const list = str.split('');
     permutationCore(result, [], list);
-    
+
     return result;
 }
 
@@ -32,6 +34,7 @@ function Permutation(str) {
  */
 function permutationCore(result, currentResult, list) {
 
+    // 递归出口：待全排列的字符串长度为0
     if (!list.length) {
         const str = currentResult.join('');
         !result.includes(str) && result.push(str);
@@ -42,16 +45,71 @@ function permutationCore(result, currentResult, list) {
     for (let i = 0; i < list.length; i++) {
         // 选择当前元素作为填充的第一个元素
         currentResult.push(list[i]);
-        const newList = [...list.slice(0, i), ...list.slice(i + 1)]
 
+        const newList = [...list.slice(0, i), ...list.slice(i + 1)];
         permutationCore(result, currentResult, newList);
 
         currentResult.pop();
     }
 }
 
+/**
+ * 第二版：@date 2020-7-13
+ * 今天看到这个以前的解法，觉得空间复杂度太大了一些，permutationCore中每次都要生成新的数组，所以想着是不是通过数组元素的交换，
+ * 可以实现降低空间复杂度的预期。但是没有按照字典序排列，如果在牛客上可能没办法all pass
+ */
+function permutation(str) {
+    if (!str) {
+        return [];
+    }
+    const original = str.split('');
+    const result = [];
+    permutationCoreImprove(original, result, 0, str.length);
+    return result;
+}
+
+/**
+ * 全排列的主要函数
+ * @param {*} list 当前在全排列的数组
+ * @param {*} result 结果数组，存储全排列成的字符串
+ * @param {*} pathLength 当前在排列第几位字符串
+ * @param {*} length 全排列数组的长度
+ */
+function permutationCoreImprove(list, result, pathLength, length) {
+    // 1. 递归出口：数组中的所有字符都已经用过了
+    if (pathLength === length) {
+        const str = list.join('');
+        // 防止重复字符串插入
+        !result.includes(str) && result.push(str);
+        return;
+    }
+
+    // 2. 在剩余的数组元素中，依次选择一个元素，放到当前待填充的位置，然后递归下一轮
+    // i表示这一轮要找哪个元素，填充到待填充的位置，其实就是交换过去
+    for (let i = pathLength; i < length; i++) {
+        // 注意这里有回溯的思想，用完的东西要放回去，所以这里的写法是对称的；
+        // 2.1) 交换
+        let temp = list[i];
+        list[i] = list[pathLength];
+        list[pathLength] = temp;
+        pathLength++;
+
+        // 2.2) 当前填充的位置已经放了一个元素了，可以进行下一轮的递归了
+        permutationCoreImprove(list, result, pathLength, length);
+
+        // 2.3) 后面的递归已经执行完，这时候要把在这一轮中出现的修改，改回去
+        pathLength--;
+        temp = list[i];
+        list[i] = list[pathLength];
+        list[pathLength] = temp;
+    }
+
+}
+
+
 function testFunc() {
     console.log(Permutation('aa'));
+    console.log(permutation('aa'));
 }
 
 testFunc();
