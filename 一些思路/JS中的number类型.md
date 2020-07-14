@@ -11,18 +11,23 @@
 4. 小心位运算：虽然JS的number有64位，但是在进行位运算时，会把浮点数截断为32位的有符号整型，也就是说超出这个范围的位移操作将会得到错误的值。
 
 5. 还是位移运算：猜测一下 1 << 32 的值 和 1 << 31后再 << 1的值：   
-```JS 
-1 << 32  // 1
-let a = 1 << 31; // a = -2147483648
-a << 1; // a = 0;
-```
-造成这个计算值不同的原因为：
->Shift operators convert their operands to 32-bit integers in big-endian order, and return a result of the same type as the left operand. Only the low five bits of the right operand will be used.  
+    ```JS 
+    1 << 32  // 1
+    let a = 1 << 31; // a = -2147483648
+    a << 1; // a = 0;
+    ```
+    造成这个计算值不同的原因为：
+    >Shift operators convert their operands to 32-bit integers in big-endian order, and return a result of the same type as the left operand. Only the low five bits of the right operand will be used.  
 
-也就是当右侧位移数只会取其最低位的5bit，这样的话，1 << 32 就等价于 1 << 0，结果即为1。同理我们可得一个结论：  
-***右侧operator的真正有效值为模32，即operator = operator % 32;***
+    也就是当右侧位移数只会取其最低位的5bit，这样的话，1 << 32 就等价于 1 << 0，结果即为1。同理我们可得一个结论：  
+    ***右侧operator的真正有效值为模32，即operator = operator % 32;***
 
 6. 0.1 + 0.2 === 0.3这个等式为false，原因是因为在表示0.1和0.2的时候，由于精度问题就进行了两次四舍五入操作，在计算他们俩之和的时候，又进行了一次四舍五入，这与0.3进行一次四舍五入表示的值显然不同。具体原因见文章[1]。
+
+7. 关于负数位移的一些知识（推荐查看文章13.）  
+在机器中，数的二进制码都是其补码。  
+① 负数的右移：需要保持数为负数，所以操作是对负数的二进制位左边补1。如果一直右移，最终会变成-1，即(-1)>>1是-1。  
+② 负数的左移：和整数左移一样，在负数的二进制位右边补0，一个数在左移的过程中会有正有负的情况，所以切记负数左移不会特殊处理符号位。如果一直左移，最终会变成0。
 
 
 # 推荐文章阅读
@@ -38,3 +43,4 @@ a << 1; // a = 0;
 10. [图解：JavaScript中Number的一些表示上/下限](https://segmentfault.com/a/1190000000407658#item-3)
 11. [MDN-位运算](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Bitwise_Operators)
 12. [JS如何处理超过32位的整数的位运算](https://blog.csdn.net/LingXi__Y/article/details/82022828)
+13. [原码、补码以及正数/负数的左移和右移](https://blog.csdn.net/qq_42780289/article/details/103970952?utm_medium=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-3.nonecase&depth_1-utm_source=distribute.pc_relevant.none-task-blog-BlogCommendFromMachineLearnPai2-3.nonecase)
