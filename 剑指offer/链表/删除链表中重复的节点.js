@@ -13,10 +13,11 @@ function deleteDuplication(head) {
     // 先声明并初始化几个追踪节点
     let prevNode = null;
     let currentNode = head;
+    let nextNode = null;
 
     // 遍历链表
     while (currentNode !== null) {
-        let nextNode = currentNode.next;
+        nextNode = currentNode.next;
 
         // 当前值和下一个值重复
         if (nextNode && currentNode.val === nextNode.val) {

@@ -31,10 +31,11 @@ function deleteNode(head, toBeDeleted) {
         head = null;
     } else {
         // 链表长度大于1，删除尾结点，这个时候需要顺序查找尾结点的上一个节点
-        let preNode = head;
-        while (preNode.next !== toBeDeleted) {
-            preNode = preNode.next;
+        let pNode = head;
+        while (pNode.next !== toBeDeleted) {
+            pNode = pNode.next;
         }
-        preNode.next = null;
+        pNode.next = null;
     }
+    return head;
 }
