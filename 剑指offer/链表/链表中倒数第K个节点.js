@@ -1,5 +1,5 @@
 /**
- * @desc 　输入一个链表，输出该链表中倒数第k个结点。为了符合大多数人的习惯，本题从1开始计数，即链表的尾结点是倒数第1个结点。
+ * @desc 输入一个链表，输出该链表中倒数第k个结点。为了符合大多数人的习惯，本题从1开始计数，即链表的尾结点是倒数第1个结点。
  * 例如一个链表有6个结点，从头结点开始它们的值依次是1、2、3、4、5、6。这个链表的倒数第3个结点是值为4的结点。
  *
  * 思路：倒数第K个节点，一般思路而言，也就是说我们要从最后一个节点，倒数走K-1步，但是这是个单向链表，这种想法肯定行不通。那么还有一种思路，
@@ -18,28 +18,28 @@
 
 function findKthToNail(head, k) {
 
-        // 先处理一下第1，2种情况
-        if (!head || k === 0) {
+    // 先处理一下第1，2种情况
+    if (!head || k === 0) {
+        return null;
+    }
+
+    let first = head;
+    for (let i = 0; i < k - 1; i++) {
+        // 注意处理情况3
+        if (first.next) {
+            first = first.next;
+        } else {
             return null;
         }
+    }
 
-        let first = head;
-        for (let i = 0; i < k - 1; i++) {
-            // 注意处理情况3
-            if (first.next) {
-                first = first.next;
-            } else {
-                return null;
-            }
-        }
+    let second = head;
+    while (first.next) {
+        second = second.next;
+        first = first.next;
+    }
 
-        let second = head;
-        while (first.next) {
-            second = second.next;
-            first= first.next;
-        }
-
-        return second;
+    return second;
 }
 
 

@@ -18,14 +18,14 @@ function reorderOddEven(array) {
     // 设置左右两个指针，来追踪偶数和奇数，并进行交换
     let left = 0;
     let right = length - 1;
-    
-    while(left <= right) {
+
+    while (left <= right) {
         // 左指针遇到偶数停
-        while(left <= right && (array[left] & 1) === 1) {
+        while (left <= right && (array[left] & 1) === 1) {
             left++;
         }
         // 右指针遇到奇数停
-        while(left <= right && (array[right] & 1) === 0 ) {
+        while (left <= right && (array[right] & 1) === 0) {
             right--;
         }
 
@@ -72,5 +72,5 @@ function solution(array) {
 const testarray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 const testarray2 = [];
 const testarray3 = [1];
-const testarray4 = [2,4,6,1,3,5,7];
+const testarray4 = [2, 4, 6, 1, 3, 5, 7];
 console.log(solution(testarray4));
