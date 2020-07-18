@@ -29,11 +29,12 @@ function FindPath(root, expectNumber) {
 }
 
 /**
- * 从当前节点出发，给定已经入栈的一些节点，是否能找到一条和等于预期值的路径
+ * 从当前节点出发，给定已经入栈的一些节点，找到所有的节点值的和为目标值的路径，并输出出来
  * @param {*} pRoot 递归开始的根节点
  * @param {*} paths 当前路径上已有的节点
  * @param {*} currentSum 当前路径上节点的和
  * @param {*} expectedSum 预期的和
+ * @param {*} result 结果数组，用来保存找到的一条路径
  */
 function findPathCore(pRoot, paths, currentSum, expectedSum, result) {
 

@@ -7,7 +7,7 @@
  * 时间复杂度有点太高了，我们下面通过两种方法来实现在O(n)内找到S’节点。
  */
 
-function RandomListNode(x){
+function RandomListNode(x) {
     this.label = x;
     this.next = null;
     this.random = null;
@@ -29,7 +29,7 @@ function Clone_1(pHead) {
 
     // 把头结点复制一下
     let pNode = pHead;
-    let clonedNode= new RandomListNode(pNode.label);
+    let clonedNode = new RandomListNode(pNode.label);
     const clonedNodeHead = clonedNode;
     hashmap.set(pNode, clonedNodeHead);
 

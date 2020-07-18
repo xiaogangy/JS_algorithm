@@ -29,13 +29,13 @@ function verifySquenceOfBST(sequence) {
     const root = sequence[length - 1];
 
     // 2. 根据左子树小于根节点值的特点，划分左子树的数组
-    let i = 0; // i用来保存划分的左右子树的index，最终i的值指向右子树数组的起始位置
+    let i = 0; // i用来保存划分左右子树的index，最终i的值指向右子树数组的起始位置
     for (; i < length - 1; i++) {
         if (sequence[i] > root) {
             break;
         }
     }
-    // 判断构成右子树的数组中的所有值
+    // 判断构成右子树的数组中的所有值，必须都大于根节点的值
     let j = i;
     for (; j < length - 1; j++) {
         if (sequence[j] < root) {
@@ -45,6 +45,7 @@ function verifySquenceOfBST(sequence) {
 
     // 3. 拆分左右子树之后，开始递归判断左右子数组是否可以构成二叉搜索树
     let left = true;
+    // 如果长度为0，那就说明左子树为空，不用判断了，直接就是true
     if (i > 0) {
         left = verifySquenceOfBST(sequence.slice(0, i));
     }

@@ -6,13 +6,16 @@
  * 另外一个数组追踪当前栈中的最小元素。
  */
 
+// 数据栈
 const stackA = [];
+// min栈
 const stackB = [];
 
 // 推入元素
 function push(node) {
     const lengthB = stackB.length;
     // 每次插入元素，都要和栈B的栈顶元素做比较，更小的元素才插入B
+    // 这里要注意这个等号，因为数据栈中的最小元素有可能是重复的，如果相同元素没有插入到min栈，弹出就有问题
     if (!lengthB || stackB[lengthB - 1] >= node) {
         stackB.push(node);
     }
