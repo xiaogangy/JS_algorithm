@@ -19,6 +19,7 @@ function Permutation(str) {
     if (!str) {
         return [];
     }
+    // 保存可以拼成的字符串
     let result = [];
     const list = str.split('');
     permutationCore(result, [], list);

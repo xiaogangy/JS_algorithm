@@ -28,27 +28,28 @@ function Clone_1(pHead) {
     const hashmap = new Map();
 
     // 把头结点复制一下
-    let pNode = pHead;
-    let clonedNode = new RandomListNode(pNode.label);
-    const clonedNodeHead = clonedNode;
-    hashmap.set(pNode, clonedNodeHead);
+    const clonedNodeHead = new RandomListNode(pHead.label);
+    hashmap.set(pHead, clonedNodeHead);
 
-    let pNextNode = null;
+    let pNode = pHead;
+    let clonedNode  = clonedNodeHead;
+    // 链表的链接需要知道当前节点和前一个节点，或者说当前节点和下一个节点
     let clonedNextNode = null;
 
+    // 把当前待复制的节点，挪到链表的第二个节点位置处，接下来开始复制
+    pNode = pNode.next;
     // 1. 先复制节点与next指针
-    while (pNode.next) {
-        // 复制下一个节点，并更新next指针
-        pNextNode = pNode.next;
-        clonedNextNode = new RandomListNode(pNextNode.label);
+    while (pNode) {
+        // 复制当前节点，并把之前的节点指向到当前节点
+        clonedNextNode = new RandomListNode(pNode.label);
         clonedNode.next = clonedNextNode;
 
-        // 把next节点的映射关系也加入到hashmap中
-        hashmap.set(pNextNode, clonedNextNode);
+        // 把pNode 和 clonedNextNode的映射关系保存起来
+        hashmap.set(pNode, clonedNextNode);
 
-        // 更新要访问的节点
-        pNode = pNextNode;
-        clonedNode = clonedNextNode;
+        // 更新追踪节点的信息
+        pNode = pNode.next;
+        clonedNode = clonedNode.next;
     }
 
     // 2. 再复制每个节点的random指针

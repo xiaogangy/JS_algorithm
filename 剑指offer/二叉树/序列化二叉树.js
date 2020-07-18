@@ -45,7 +45,7 @@ function serialize(pRoot) {
  */
 function deserialize(s) {
     // 空二叉树
-    if (!list.length || (list.length === 1 && list[0] === '$')) {
+    if (!list.length) {
         return null;
     }
 
