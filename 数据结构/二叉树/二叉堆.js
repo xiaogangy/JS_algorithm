@@ -86,3 +86,9 @@ function testFunc() {
 }
 
 testFunc();
+
+module.exports = {
+    upAdjust,
+    downAdjust,
+    buildBinaryHeap
+};
