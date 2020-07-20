@@ -15,3 +15,62 @@
  * 0~9这十个数字中任意选择，因此根据排列组合，总共出现的次数为2*4*10^3=8000次。
  * 至于1在1~1345中出现的次数，我们就可以用递归求解了。
  */
+
+function solution(n) {
+    // 为了编程方便，我们把n转换成数组
+    if (n <= 0) {
+        return 0;
+    }
+    const arr = String(n).split('').map(item => +item);
+    return numbersOf1(arr);
+}
+
+/**
+ * 根据传入的数组，得到1出现的次数
+ * @param {*} arr 数字转换成的数组
+ */
+function numbersOf1(arr) {
+    // 健壮性无脑怼上
+    if (!arr.length) {
+        return 0;
+    }
+
+    const length = arr.length;
+    const first = arr[0];
+
+    // 递归出口1：传入一个个位数，而且这个个位数大于1，则1出现的次数为1
+    if (length === 1 && first >= 1) {
+        return 1;
+    }
+    // 递归出口2：传入一个个位数，而且这个个位数小于1，则1出现的次数为0
+    if (length === 1 && first < 1) {
+        return 0;
+    }
+
+    // 步入正题，解题过程中，还是以21345来思考
+    // 1. 统计最高位出现1的次数
+    let firstDigitAs1 = 0;
+    if (first > 1) {
+        firstDigitAs1 = Math.pow(10, length - 1);
+    } else if (first === 1) {
+        // 注意这里的if条件一定是first === 1，因为递归的时候，第一位有可能是等于0的
+        firstDigitAs1 = +arr.join('') - Math.pow(10, length - 1) + 1;
+    }
+
+    // 2. 统计其他位1出现的次数
+    // 让我们先看看高位总共能拆出来多少个10的整数次方，例如1346~21345，最高位是2，可以拆出来2个10000的区间
+    // 来对应一下，first是最高位，length - 1是除了最高位还有统计其他总共几个位置，Math.pow(10, length - 2)表示其中一位为1时，其他位置可能的情况
+    const numOfOtherDigits = first * (length - 1) * Math.pow(10, length - 2);
+
+    // 3. 递归求得剩余的区间的数，比如1~1345
+    arr.shift();
+    const recursiveNum = numbersOf1(arr);
+
+    return firstDigitAs1 + numOfOtherDigits + recursiveNum;
+}
+
+function testFunc() {
+    const number = 15;
+    console.log(solution(number));
+}
+testFunc();
