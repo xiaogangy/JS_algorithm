@@ -8,41 +8,44 @@
  */
 
 /**
- * 利用以上公式得到的最简单的写法
+ * solution1： 树的高度 = 子树高度的最大值 + 1
  * @param {*} pRoot 二叉树根节点
+ * @return {number} 树的深度
  */
-function TreeDepth_1(pRoot) {
+function TreeDepthRecursive(pRoot) {
     // 判断是否是空树，也是递归的终止条件
     if (!pRoot) {
         return 0;
     }
 
-    const left = TreeDepth_1(pRoot.left);
-    const right = TreeDepth_1(pRoot.right);
+    const left = TreeDepthRecursive(pRoot.left);
+    const right = TreeDepthRecursive(pRoot.right);
 
     return Math.max(left, right) + 1;
 }
 
 /**
- * 这种方法是我之前做回溯法找到的一些规律，也算是一种思路吧，和上面的方法
- * 没有什么优劣之分。思路是从根节点开始，自上而下的求最长路径，而上面的第一种
- * 解法有点像自下而上的思路。
+ * 这种方法是我之前做回溯法找到的一些规律，解答过程非常类似习题“二叉树中和为某一值的路径”。也算是一种思路吧，和上面的方法没有什么优劣之分。
+ * 思路是从根节点开始，自上而下的求最长路径，模拟的是我们从根节点往叶节点出发找最长路径的方法。而上面的第一种解法有点像从下往上的思路。
  * @param {*} pRoot 二叉树根节点
+ * @return {number} 树的深度
  */
 function TreeDepth(pRoot) {
     if (!pRoot) {
         return 0;
     }
 
-    return TreeDepthCore(pRoot, 0);
+    return treeDepthCore(pRoot, 0);
 }
 
 /**
- * 表示从pRoot这个节点出发，能找到的最长路径，主要是在改变currentLength的长度
+ * note：写递归函数，最重要的是在写之前明确这个递归函数是干什么的。比如这个方法，目的就是找到从当前节点出发，能找到的最长路径，那么这自然就要保存
+ * 我们在往叶节点寻找过程中的路径；同时，写递归还有一个注意点是什么？如何让问题规模通过一定的转化变小，这里就变成了从子节点出发能找到的最长路径了。
  * @param {*} pRoot 根节点
  * @param {*} currentLength 当前这条路上已经有的节点数量
+ * @return {number} 树的深度
  */
-function TreeDepthCore(pRoot, currentLength) {
+function treeDepthCore(pRoot, currentLength) {
 
     // 先把当前这个节点算到路径里，给当前形成的路长加1
     currentLength = currentLength + 1;
@@ -50,10 +53,10 @@ function TreeDepthCore(pRoot, currentLength) {
     let right = currentLength;
 
     if (pRoot.left) {
-        left = TreeDepthCore(pRoot.left, currentLength);
+        left = treeDepthCore(pRoot.left, currentLength);
     }
     if (pRoot.right) {
-        right = TreeDepthCore(pRoot.right, currentLength);
+        right = treeDepthCore(pRoot.right, currentLength);
     }
     return Math.max(left, right);
 
@@ -75,7 +78,7 @@ function testFunc() {
     node1.right = node3;
     node2.left = node4;
     node2.right = node5;
-    console.log(TreeDepth_1(node1));
+    console.log(TreeDepthRecursive(node1));
 }
 
 testFunc();
