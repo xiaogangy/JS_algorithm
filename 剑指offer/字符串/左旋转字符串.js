@@ -18,24 +18,24 @@ function reverse(arr, start, end) {
 }
 
 function leftReverse(str, n) {
-    if (!str.length) {
-        return str;
+    if (!str || !str.length) {
+        return '';
     }
-
+    const count = n % str.length;
     const arr = str.split('');
     const length = arr.length;
     // 1. 先整体翻转
     reverse(arr, 0, length - 1);
     // 2. 再局部翻转
-    reverse(arr, 0, length - n - 1);
-    reverse(arr, length - n, length - 1);
+    reverse(arr, 0, length - count - 1);
+    reverse(arr, length - count, length - 1);
 
     return arr.join('');
 }
 
 function testFunc() {
     const str = 'abcdefg';
-    const n = 7;
+    const n = 8;
     console.log(leftReverse(str, n));
 }
 testFunc();

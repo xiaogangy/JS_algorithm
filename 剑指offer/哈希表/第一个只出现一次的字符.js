@@ -50,13 +50,14 @@ function solution(str) {
 
 // 哈希表
 const hashmap = {};
+let index = 0;
 
 /**
  * 从数据流中读取字符
  * @param {*} char 读取的字符
  * @param {number} index 新加入的字符的位置
  */
-function insert(char, index) {
+function insert(char) {
     if (hashmap.hasOwnProperty(char)) {
         // 哈希表中已经有了该字符，说明该字符已经重复了，直接置为-2
         hashmap[char] = -2;
@@ -64,6 +65,7 @@ function insert(char, index) {
         // 哈希表中还没出现，置为该字符出现的位置
         hashmap[char] = index;
     }
+    index++;
 }
 
 /**
@@ -73,7 +75,7 @@ function insert(char, index) {
  */
 function getFirstChar() {
     let min = Number.MAX_VALUE;
-    let ret = -1;
+    let ret = '#';
     Object.keys(hashmap).forEach(key => {
         const value = hashmap[key];
         if (value >= 0 && value < min) {
@@ -87,9 +89,10 @@ function getFirstChar() {
 function testFunc() {
     // const str = 'abaccdeff';
     // console.log(solution(str));
-    'abaccdeff'.split('').forEach((char, index) => {
-        insert(char, index);
+    'helloworld'.split('').forEach((char) => {
+        insert(char);
+        console.log(getFirstChar());
     });
-    console.log(getFirstChar());
+    console.log(hashmap);
 }
 testFunc();
