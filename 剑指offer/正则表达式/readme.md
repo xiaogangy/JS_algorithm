@@ -87,9 +87,24 @@
 - `{n,}?`: 重复n次以上，但尽可能少重复
 
 
+## JS中使用正则
+正则表达式可以被用于 RegExp 的 exec 和 test 方法以及 String 的 match、replace、search 和 split 方法。
+1. 正则的声明：有两种声明方法
+- 正则表达式字面量：`/pattern/flags`，pattern即为要进行匹配的正则规则，flags为高级标识位，例如g为全局搜索，i为不区分大小写
+- 调用RegExp对象的构造函数：`new RegExp('ab+c')`
+>如果你想将字符串传递给 RegExp 构造函数，不要忘记在字符串字面量中反斜杠是转义字符。所以为了在模式中添加一个反斜杠，你需要在字符串字面量中转义它。/[a-z]\s/i 和 new RegExp("[a-z]\\s", "i") 创建了相同的正则表达式：一个用于搜索后面紧跟着空白字符（\s 可看后文）并且在 a-z 范围内的任意字符的表达式。为了通过字符串字面量给 RegExp 构造函数创建包含反斜杠的表达式，你需要在字符串级别和正则表达式级别都对它进行转义。例如 /[a-z]:\\/i 和 new RegExp("[a-z]:\\\\","i") 会创建相同的表达式，即匹配类似 "C:\" 字符串。
+2. 使用方法：
+- reg.exec(String): 一个在字符串中执行查找匹配的RegExp方法，它返回一个数组（未匹配到则返回 null）。
+- reg.test(String): 一个在字符串中测试是否匹配的RegExp方法，它返回 true 或 false。
+- str.match(reg): 一个在字符串中执行查找匹配的String方法，它返回一个数组，在未匹配到时会返回 null。
+- str.matchAll(reg): 一个在字符串中执行查找所有匹配的String方法，它返回一个迭代器（iterator）。
+- str.search(reg): 一个在字符串中测试匹配的String方法，它返回匹配到的位置索引，或者在失败时返回-1。
+- str.replace(regexp|substr): 一个在字符串中执行查找匹配的String方法，并且使用替换字符串替换掉匹配到的子字符串。
+- str.split(regexp|substr): 一个使用正则表达式或者一个固定字符串分隔一个字符串，并将分隔后的子字符串存储到数组中的 String 方法。
+
 ## 参考文章：
 [正则表达式30分钟入门](https://deerchao.cn/tutorials/regex/regex.htm)  
-[MDN-正则表达式](https://deerchao.cn/tutorials/regex/regex.htm)  
+强烈推荐： [MDN-正则表达式](https://deerchao.cn/tutorials/regex/regex.htm)  
 [Learn Regular Expressions In 20 Minutes](https://www.youtube.com/watch?v=rhzKDrUiJVk)  
 
 在线测试正则表达式：  
