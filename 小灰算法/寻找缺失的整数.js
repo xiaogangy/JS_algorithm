@@ -50,7 +50,7 @@ function findOddNumber_2 (arr) {
     }
     // 2. 找出为1的位
     let separator = 1;
-    for (let j = 0; j < arr.length; j++) {
+    while (separator) {
         if ((result & separator) !== 0) {
             break;
         } else {

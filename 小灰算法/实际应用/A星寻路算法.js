@@ -47,10 +47,10 @@ class Grid {
     initGrid(parent, end) {
         this.parent = parent;
         // parent传null，表示是起始节点初始化
-        if (!parent) {
+        if (parent) {
             this.G = parent.G + 1;
         } else {
-            this.G = 1;
+            this.G = 0;
         }
         this.H = Math.abs(this.x - end.x) + Math.abs(this.y - end.y);
         this.F = this.G + this.H;

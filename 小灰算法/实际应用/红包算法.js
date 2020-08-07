@@ -28,7 +28,7 @@ function divideRedPackage(totalAmount, totalPeopleNum) {
     let restAmount = totalAmount;
     let restPeopleAmount = totalPeopleNum;
 
-    for (let i = 0; i < totalPeopleNum - 1; i++) {
+    for (let i = 1; i < totalPeopleNum; i++) {
         // 获取[1, 剩余金额/剩余人数 * 2 - 1]之间的随机数
         const left = 1;
         const right = restAmount / restPeopleAmount * 2 - 1;
@@ -53,7 +53,8 @@ function solution3(totalAmount, totalPeopleNum) {
     const left = 1;
     const right = totalAmount - 1;
     const separator = [];
-    for (let i = 0; i < totalPeopleNum - 1; i++) {
+    // n个用户，需要n-1个切割点
+    for (let i = 1; i < totalPeopleNum; i++) {
         let number = parseInt(Math.random() * (right - left + 1) + left, 10);
         // 出现重复，重新进行计算
         while (separator.includes(number)) {

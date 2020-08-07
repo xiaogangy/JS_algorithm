@@ -7,9 +7,9 @@
  * 同时，这个数为了和原数最接近，那么就应该让变化尽量小，即尽量保持高位不变，低位在最小范围内变换顺序。
  * 
  * solution：
- * 1. 从后向前查看逆序区域，找到逆序区域的前一位，也就是数字置换的边界
- * 2. 让逆序区域的前一位和逆序区域中大于它的最小的数字交换位置
- * 3. 把原来的逆序区域转为顺序状态
+ * 1. 从后向前查看逆序区域，找到第一个逆序区域中的第一位，也就是数字置换的边界
+ * 2. 让逆序区域的第一位和其后区域中大于它的最小的数字交换位置
+ * 3. 把原来的顺序区域转为逆序状态
  */
 
 function findNearsetNumber(number) {
@@ -20,8 +20,8 @@ function findNearsetNumber(number) {
     // 1. 先找逆序区域，找到逆序区域的前一位
     let index = 0;
     for (let i = length - 1; i > 0; i--) {
-        if (list[i] > list[i - 1]) {
-            // 注意这里是把逆序区域的起始index传回去了
+        if (i - 1 >= 0 && list[i] > list[i - 1]) {
+            // 注意这里是把逆序区域的后一位index传回去了
             index = i;
             break;
         }
@@ -31,7 +31,7 @@ function findNearsetNumber(number) {
         return null;
     }
 
-    // 2. 找到逆序区域中大于刚刚好大于待交换元素的值，交换二者
+    // 2. 找到其后区域中刚刚好大于待交换元素的值，交换二者
     const comparedValue = list[index - 1];
     for (let j = length - 1; j > (index - 1); j--) {
         if (list[j] > comparedValue) {

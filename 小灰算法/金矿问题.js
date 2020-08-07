@@ -7,19 +7,19 @@
  * 金矿4： 价值400kg, 需要5人
  * 金矿5： 价值500kg, 需要5人
  * 每个金矿要么全挖，要么不挖，那么要想获得尽可能多的黄金，应该如何选择挖哪几个金矿？
- * 
+ *
  * 思路：这道题和0-1背包问题如出一辙，是一道动态规划的题目，那么什么是动态规划呢？
  * 动态规划是一种分治思想，即把复杂的问题简化成为规模较小的子问题，再从简单的子问题自底向上一步步地推，最终得到复杂问题的最优解。动态规划是解决重叠子问题的一种方法。
  * 那么对于这道题的分析可以如下进行：
  * 每座金矿存在两种情况，要么挖，要么不挖，例如以第5座金矿为例，可以选择挖或者不挖，如果挖的话，那么人力变为5人，这剩下的5人要在剩余的4座金矿中做出选择；或者不挖，即10人在4座金矿做出选择；
  * 问题就变为这两种情况下，找到可以产生的最大收益，这种情况就被称为全局问题的两个最优子结构。继续分治的话，每种情况又可以分为，要不要挖第四座矿，持续划分，直到简化为0个工人或者0座金矿可供选择的情况，
  * 这个时候的收益显然为0，我们把这种终止情况称为边界。
- * 
+ *
  * 动态规划的要点：
  * 1. 确定全局最优解和最优子结构之间的关系
  * 2. 确定问题的边界
  * 上面2个要点，我们可以称之为状态转移方程
- * 
+ *
  * 解法：对应在本题，我们可以做如下分析
  * 假设金矿数量为n，工人数量为w，金矿的含金量为g[]，每座金矿需要的开采人员数量为p[]，F(n, w)表示w个工人开采n个金矿可达到的最大收益。可得到的状态转移方程如下：
  * F(n, w) = 0(n=0或者w=0)
@@ -34,6 +34,7 @@
  * @param {*} w 工人数量
  * @param {*} g 金矿的含金量
  * @param {*} p 每座金矿的开采人员数量
+ * @return {number} 最大的黄金数
  */
 function getBestGoldMining(n, w, g, p) {
     // 递归先写终止条件
@@ -42,12 +43,12 @@ function getBestGoldMining(n, w, g, p) {
         return 0;
     }
     // 2. 第二种状态转移方程
-    if (w < p[n-1]) {
-        return getBestGoldMining(n-1, w, g, p);
+    if (w < p[n - 1]) {
+        return getBestGoldMining(n - 1, w, g, p);
     }
     // 3. 常规状态转移方程
-    const sub1 = getBestGoldMining(n-1, w, g, p); // 不挖第n个矿
-    const sub2 = getBestGoldMining(n-1, w-p[n-1], g, p) + g[n-1]; // 挖第n个矿
+    const sub1 = getBestGoldMining(n - 1, w, g, p); // 不挖第n个矿
+    const sub2 = getBestGoldMining(n - 1, w - p[n - 1], g, p) + g[n - 1]; // 挖第n个矿
     return Math.max(sub1, sub2);
 }
 
@@ -67,11 +68,12 @@ function getBestGoldMining(n, w, g, p) {
  * 即F(5, 10)的值，这就是最终的收益。
  *
  * 时间复杂度，空间复杂度： O(n * w)
- * 
+ *
  * @param {*} n 金矿数量
  * @param {*} w 工人数量
  * @param {*} g 金矿的含金量
  * @param {*} p 每座金矿的开采人员数量
+ * @return {number} 最大的黄金数
  */
 function getBestGoldMining_Opt(n, w, g, p) {
     // 先声明结果表格，是一个二维数组
@@ -101,6 +103,7 @@ function getBestGoldMining_Opt(n, w, g, p) {
  * @param {*} w 工人数量
  * @param {*} g 金矿的含金量
  * @param {*} p 每座金矿的开采人员数量
+ * @return {number} 最大的黄金数
  */
 function getBestGoldMining_final(n, w, g, p) {
     // 创建当前结果
