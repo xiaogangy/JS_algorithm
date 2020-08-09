@@ -9,7 +9,7 @@
 
 function cocktailSort(arr) {
     const length = arr.length;
-    // 注意：JS中没有整数的概念，因此也没有除法自动取整的结果，想要达到JAVA中的效果，用Math.floor
+    // 注意：JS中没有整数的概念，因此也没有除法自动取整的结果，想要达到JAVA中的效果，用Math.floor(还是直接来位运算吧，>> 1它不香吗)
     for (let i = 0; i < Math.floor(length / 2); i++) {
 
         let isSorted = true;
