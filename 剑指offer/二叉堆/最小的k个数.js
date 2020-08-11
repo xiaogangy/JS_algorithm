@@ -32,7 +32,7 @@ function solution1(input, k) {
         if (index < k - 1) {
             index = partition(input, index + 1, end);
         } else {
-            index = partition(input , start, index - 1);
+            index = partition(input, start, index - 1);
         }
     }
 

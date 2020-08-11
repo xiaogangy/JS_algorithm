@@ -65,13 +65,13 @@ function GetMedian() {
     if ((size & 1) === 0) {
         return (MAX.array[0] + MIN.array[0]) / 2;
     } else {
-        return MAX.array[0];
+        return MIN.array[0];
     }
 }
 
 
 function testFunc() {
-    const numbers = [1, 3, 2, 8, 9, 7];
+    const numbers = [1, 3, 2, 8, 9];
     numbers.forEach(number => {
         Insert(number);
     });
