@@ -78,7 +78,7 @@ function entryNodeOfLoop(head) {
  * 完整的代码实现
  * @param {*} head 链表头结点
  */
-function contact(head) {
+function solution(head) {
     // 空节点
     if (!head) {
         return null;
