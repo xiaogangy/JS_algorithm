@@ -27,11 +27,12 @@ function findLostNumber(data) {
     let end = length - 1;
 
     while (start <= end) {
-        let middleIndex = (start + end) >> 1;
+        let middleIndex = start + (end - start) >> 1;
         let middleValue = data[middleIndex];
 
         if (middleValue !== middleIndex) {
-            if(middleIndex === 0 || data[middleIndex - 1] === middleIndex - 1) {
+            // 要注意一下当前元素是数组第一个元素的情况
+            if (middleIndex === 0 || data[middleIndex - 1] === middleIndex - 1) {
                 return middleIndex;
             }
             end = middleIndex - 1;

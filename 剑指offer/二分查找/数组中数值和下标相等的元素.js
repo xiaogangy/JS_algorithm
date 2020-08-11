@@ -16,12 +16,12 @@ function solution(data) {
     let end = length - 1;
 
     while (start <= end) {
-        let middleIndex = (start + end) >> 1;
+        let middleIndex = end + (end - start) >> 1;
         let middleValue = data[middleIndex];
 
         if (middleValue === middleIndex) {
             return middleValue;
-        } else if (middleIndex < middleValue){
+        } else if (middleIndex < middleValue) {
             end = middleIndex - 1;
         } else {
             start = middleIndex + 1;

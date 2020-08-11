@@ -15,7 +15,8 @@ function binarySearchRecursive(data, k, start, end) {
     if (start > end) {
         return -1;
     }
-    const middleIndex = (start + end) >> 1;
+    // 之所以要写成start + (end - start) >> 1的风格，是防止start + end出现大数溢出
+    const middleIndex = start + (end - start) >> 1;
     const middleValue = data[middleIndex];
 
     if (middleValue === k) {
@@ -47,7 +48,7 @@ function binarySearch(data, k, start, end) {
 
     // 注意这里的循环判断条件
     while (start <= end) {
-        const middleIndex = (start + end) >> 1;
+        const middleIndex = start + (end - start) >> 1;
         const middleValue = data[middleIndex];
         if (middleValue === k) {
             // 已找到，直接返回
