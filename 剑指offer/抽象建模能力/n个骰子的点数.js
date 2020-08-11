@@ -52,6 +52,7 @@ function solution1(n) {
 /**
  * 求扔n个骰子可以出现的点数和情况，并更新概率
  * 写递归一定要注意这一点：在写函数之前要明确你这个函数是干啥的
+ * @param {*} number 一共要扔多少个骰子
  * @param {*} step 当前要扔第几个骰子
  * @param {*} currentSum 之前骰子构成的点数和
  * @param {*} probabilities 概率数组
@@ -107,7 +108,7 @@ function solution2(n) {
             // 解析里强调的注意的地方就是这里了：j <= i，不仅是为了防止数组越界得不到值，也是符合真实意义，比如当前就2个骰子，要求和为2出现的情况，自然只有可能是
             // f(2) = f(1) + f(0)这两种情况
             for (let j = 1; j <= i && j <= 6; j++) {
-                probabilities[1 - flag][i] += probabilities[flag][i - j]
+                probabilities[1 - flag][i] += probabilities[flag][i - j];
             }
         }
         flag = 1 - flag;
