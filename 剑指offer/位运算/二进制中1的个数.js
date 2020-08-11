@@ -9,6 +9,7 @@
 /**
  * 第一种解法，判断数字的最右边一位是不是为1，然后不断的右移，直到这个数变为0
  * @param {*} n 输入数字
+ * @return {number} 1的个数
  */
 function solution1(n) {
     let count = 0;
@@ -25,6 +26,7 @@ function solution1(n) {
 /**
  * 将1不断的左移，与n每个位置的值都进行比较，直到1变为0（即超过了最大位运算的值）.
  * @param {*} n 输入数字
+ * @return {number} 1的个数
  */
 function solution2(n) {
     let count = 0;
@@ -42,6 +44,7 @@ function solution2(n) {
  * 把一个整数减去1，再和原来的整数做与运算，会把该整数最右边的1变为0。那么一个整数的二进制表示中有多少个1，就可以进行多少次这样的操作
  * 负数和正数都是这样的规律
  * @param {*} n 输入数字
+ * @return {number} 1的个数
  */
 function solution3(n) {
     let count = 0;
