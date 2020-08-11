@@ -21,6 +21,7 @@ function leftReverse(str, n) {
     if (!str || !str.length) {
         return '';
     }
+    // 注意这里，左旋转的长度可能是大于n的，所以一定要取模
     const count = n % str.length;
     const arr = str.split('');
     const length = arr.length;

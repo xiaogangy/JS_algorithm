@@ -15,6 +15,7 @@
 /**
  * 判断输入字符串是否表示数值
  * @param {*} s 输入字符串
+ * @return {boolean} 是否表示数值
  */
 function isNumeric(s) {
 
