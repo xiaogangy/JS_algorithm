@@ -28,7 +28,8 @@ function Permutation(str) {
 }
 
 /**
- * 对一组数字进行全排列
+ * 对一组数字进行全排列。在一次递归中，我们需要知道当前已经有哪些字符进行了排列，还剩哪些字符还没排列，以及最终的结果数组。
+ *
  * @param {*} result 用于最后保存所有排列的数组
  * @param {*} currentResult 当前这次排列中已经存入数组的字符
  * @param {*} list 用于全排列的字符数组
@@ -38,6 +39,7 @@ function permutationCore(result, currentResult, list) {
     // 递归出口：待全排列的字符串长度为0
     if (!list.length) {
         const str = currentResult.join('');
+        // 用&&是因为测试用例中有'aa'这种情况，如果不排除，会出现两个'aa'
         !result.includes(str) && result.push(str);
         return;
     }
@@ -50,6 +52,7 @@ function permutationCore(result, currentResult, list) {
         const newList = [...list.slice(0, i), ...list.slice(i + 1)];
         permutationCore(result, currentResult, newList);
 
+        // 当前这一次选择这个元素的子全排列已经结束了，自然要把这次的选择改回去
         currentResult.pop();
     }
 }
@@ -71,14 +74,15 @@ function permutation(str) {
 
 /**
  * 全排列的主要函数
+ *
  * @param {*} list 当前在全排列的数组
  * @param {*} result 结果数组，存储全排列成的字符串
- * @param {*} pathLength 当前在排列第几位字符串
+ * @param {*} modIndex 当前在排列第几位字符串
  * @param {*} length 全排列数组的长度
  */
-function permutationCoreImprove(list, result, pathLength, length) {
+function permutationCoreImprove(list, result, modIndex, length) {
     // 1. 递归出口：数组中的所有字符都已经用过了
-    if (pathLength === length) {
+    if (modIndex === length) {
         const str = list.join('');
         // 防止重复字符串插入
         !result.includes(str) && result.push(str);
@@ -87,22 +91,20 @@ function permutationCoreImprove(list, result, pathLength, length) {
 
     // 2. 在剩余的数组元素中，依次选择一个元素，放到当前待填充的位置，然后递归下一轮
     // i表示这一轮要找哪个元素，填充到待填充的位置，其实就是交换过去
-    for (let i = pathLength; i < length; i++) {
+    for (let i = modIndex; i < length; i++) {
         // 注意这里有回溯的思想，用完的东西要放回去，所以这里的写法是对称的；
         // 2.1) 交换
         let temp = list[i];
-        list[i] = list[pathLength];
-        list[pathLength] = temp;
-        pathLength++;
+        list[i] = list[modIndex];
+        list[modIndex] = temp;
 
         // 2.2) 当前填充的位置已经放了一个元素了，可以进行下一轮的递归了
-        permutationCoreImprove(list, result, pathLength, length);
+        permutationCoreImprove(list, result, modIndex + 1, length);
 
         // 2.3) 后面的递归已经执行完，这时候要把在这一轮中出现的修改，改回去
-        pathLength--;
         temp = list[i];
-        list[i] = list[pathLength];
-        list[pathLength] = temp;
+        list[i] = list[modIndex];
+        list[modIndex] = temp;
     }
 
 }

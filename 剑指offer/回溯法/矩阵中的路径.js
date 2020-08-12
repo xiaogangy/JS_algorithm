@@ -3,7 +3,7 @@
  * 如果一条路径经过了矩阵的某一格，那么该路径不能再次进入该格子。例如，在下面的3×4的矩阵中包含一条字符串“bfce”的路径。
  * a b t g
  * c f c s
- * j d c h
+ * j d e h
  *
  * 考点：深度优先遍历(DFS) 回溯
  * 思路：这是一道典型的回溯法题目。我们在矩阵中任选一个格子作为起点出发，判断这个格子的值是不是符合string字符上第i位的元素，如果是，则访问它相邻的四个节点，继续进行类似的操作。
@@ -42,15 +42,22 @@ function hasPath(matrix, target) {
 
 /**
  * 对从一个节点出发，寻找有效路径的抽象。
+ * 下面这些参数里，在每一轮递归里变化的参数实际上只有x,y,isVisitedArray这几个变量，其他的都是辅助作用
  * @param {*} x 当前起点的横坐标
  * @param {*} y 当前起点的纵坐标
  * @param {*} str 待寻找的字符串
  * @param {*} matrix 二维矩阵
  * @param {*} isVisitedArray 保存当前节点是否已经被访问过
+ * @param {*} rows 二维矩阵的行数
+ * @param {*} columns 二维矩阵的列数
+ * @return {boolean} 是否找到了一条路径
  */
 function hasPathCore(x, y, str, matrix, isVisitedArray, rows, columns) {
     // 这里简单分析一下这道题的递归
-    // 其中总共就三种情况，1. 要找到字符串是个空串，显然我们认定为可以找到； 2. 判断当前位置的值和要找字符串的第一个值是不是一样，一样的话，去判断它的相邻4个节点。 3. 如果不一样，则直接说明这条路径行不通，返回false
+    // 其中总共就三种情况：
+    // 1. 要找到字符串是个空串，显然我们认定为可以找到；
+    // 2. 判断当前位置的值和要找字符串的第一个值是不是一样，一样的话，去判断它的相邻4个节点。
+    // 3. 如果不一样，则直接说明这条路径行不通，返回false
     let hasFound = false;
 
     // 递归终止条件
@@ -59,8 +66,9 @@ function hasPathCore(x, y, str, matrix, isVisitedArray, rows, columns) {
     }
     // 要确保这个节点的索引是可访问的
     if (x >= 0 && x < rows && y >= 0 && y < columns && matrix[x][y] === str[0] && !isVisitedArray[x][y]) {
-        // 递归的去判断，从相邻节点出发，是否能找到符合要求的子串
+        // 表示当前这个节点已经在访问过的路径上了，下一次递归不应该再访问
         isVisitedArray[x][y] = true;
+        // 递归的去判断，从相邻节点出发，是否能找到符合要求的子串
         // 上
         const topHasPath = hasPathCore(x - 1, y, str.slice(1), matrix, isVisitedArray, rows, columns);
         // 下
