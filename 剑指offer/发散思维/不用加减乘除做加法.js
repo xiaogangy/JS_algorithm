@@ -23,7 +23,9 @@ function solution(a, b) {
     let carry = (a & b) << 1;
     // 3. 循环判断
     while (carry) {
+        // 更新结果
         const temp = result ^ carry;
+        // 再次计算进位
         carry = (result & carry) << 1;
         result = temp;
     }

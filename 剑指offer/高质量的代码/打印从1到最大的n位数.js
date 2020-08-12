@@ -72,6 +72,8 @@ function increment(arrNumber) {
             // 没有产生进位
             arrNumber[i] = current;
             carry = 0;
+            // 因为没有产生进位，后面自然也不需要再计算了
+            break;
         }
     }
 
@@ -149,3 +151,10 @@ function recursivePrint(arrNumber) {
     const value = arrNumber.slice(firstNonZeroIndex).join('');
     console.log(value);
 }
+
+function testFunc() {
+    const n = 3;
+    solution1(n);
+    solution2(n);
+}
+testFunc();

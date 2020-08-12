@@ -12,6 +12,7 @@
  * 底数呢？同样要考虑负数、0和正数的情况
  * @param {*} base 底数
  * @param {*} exponent 指数
+ * @return {number} 整数次方
  */
 function solution(base, exponent) {
     // 指数为0
@@ -55,6 +56,7 @@ function solution(base, exponent) {
  * 注意：这里的代码只是计算exponent为正的情况，只是一个局部函数
  * @param {*} base 底数
  * @param {*} exponent 指数
+* @return {number} 整数次方
  */
 function recursive(base, exponent) {
     // 指数为0
