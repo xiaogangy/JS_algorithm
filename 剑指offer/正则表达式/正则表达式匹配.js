@@ -58,7 +58,7 @@ function matchCore(string, sIndex, pattern, pIndex) {
 
     // 这里的逻辑是：我们先判断第二个字符是不是*，是*的情况比较复杂
     if (pattern[pIndex + 1] === '*') {
-        // 第二个字符是*的情况，然后再判断第一个字符是否匹配成功了。这里要注意一点用'.'来匹配所有字符从情况，一定要保证字符串当前还不为空，
+        // 第二个字符是*的情况，然后再判断第一个字符是否匹配成功了。这里要注意一点用'.'来匹配所有字符的情况，一定要保证字符串当前还不为空，
         // 也就是sIndex !== string.length
         if (pattern[pIndex] === string[sIndex] || (pattern[pIndex] === '.' && sIndex !== string.length)) {
             // 如果第一个字符也匹配成功了，那么可以以三种方式进入递归
@@ -83,7 +83,7 @@ function matchCore(string, sIndex, pattern, pIndex) {
 }
 
 function testFunc() {
-    const patterns = ['a.a', 'ab*ab*ab*', 'aa.a', 'ab*a', '******'];
+    const patterns = ['a.a', 'ab*ab*ab*', 'aa.a', 'ab*a', '******', 'aaa.*a'];
     const string = 'aaa';
     patterns.forEach(p => {
         console.log(match(string, p));
