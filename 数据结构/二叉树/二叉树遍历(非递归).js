@@ -3,8 +3,8 @@
  * 通常来讲，递归的代码因为涉及到回溯的问题，可以用栈来实现非递归的版本
  */
 
-const createStack = require('./stack');
-const createQueue = require('./queue');
+const createStack = require('../栈与队列/stack');
+const createQueue = require('../栈与队列/queue');
 
 // 节点，用链表实现
 class TreeNode {
@@ -74,7 +74,7 @@ function inOrderTraverse(rootNode) {
 
 // 后序遍历：左节点 -> 右节点 -> 根节点
 // 后序遍历的非递归版本是最为复杂的，要保证节点的左右子节点都已经访问过，才能弹出栈顶元素
-function postOrderTraverse(rootNode) {
+function postOrderTraverse1(rootNode) {
     const stack = createStack(20);
     let currentNode = rootNode;
     // 标志位
@@ -95,6 +95,35 @@ function postOrderTraverse(rootNode) {
             currentNode = parentNode.rightChild;
         }
     }
+}
+
+// 上面的后续遍历方法中，使用了一个特殊的标志位来表示上一次访问的到的节点，从而防止陷入死循环
+// 其实后序遍历还有一个非常巧妙的方法，后序遍历是左 -> 右 -> 根，这个遍历顺序如果是根 -> 右 -> 左就好了，因为这完全就是
+// 和前序遍历完全一样的写法，只不过换一下方向而已。所以我们其实可以结合前序遍历的写法，先写清楚根 -> 右 -> 左的遍历代码，
+// 然后最后再逆序输出遍历结果
+function postOrderTraverse2(rootNode) {
+    if (rootNode === null) {
+        return;
+    }
+    const stack = [];
+    const values = [];
+    let currentNode = rootNode;
+
+    // 完全就是模仿前序遍历，写一个前序遍历的镜像版本
+    while (currentNode !== null || stack.length > 0) {
+        while (currentNode !== null) {
+            stack.push(currentNode);
+            values.push(currentNode.data);
+            currentNode = currentNode.rightChild;
+        }
+        if (stack.length > 0) {
+            currentNode = stack.pop();
+            currentNode = currentNode.leftChild;
+        }
+    }
+
+    // 逆序输出values中的值
+    console.log(values.reverse().join(','));
 }
 
 // 层序遍历
@@ -123,8 +152,10 @@ function testFunc() {
     preOrderTraverse(binaryTree);
     console.log('中序遍历');
     inOrderTraverse(binaryTree);
-    console.log('后序遍历');
-    postOrderTraverse(binaryTree);
+    console.log('后序遍历1');
+    postOrderTraverse1(binaryTree);
+    console.log('后序遍历2');
+    postOrderTraverse2(binaryTree);
     console.log('层序遍历');
     levelOrderTraverse(binaryTree);
 }
