@@ -55,11 +55,11 @@ function bubbleSortOpt2(arr) {
     // 记录最后一次交换的元素位置
     let lastExchangeIndex = 0;
     // 无序数列的边界，每次比较只需要比较到这里即可
-    let sortedBorder = length - 1;
+    let unsortedBorder = length - 1;
     for (let i = 0; i < length - 1; i++) {
         // 增加一个用来判断本轮是否有交换元素的变量，如果没交换，则说明当前序列已经有序
         let sorted = true;
-        for (let j = 0; j < sortedBorder; j++) {
+        for (let j = 0; j < unsortedBorder; j++) {
             if (arr[j] > arr[j + 1]) {
                 const temp = arr[j + 1];
                 arr[j + 1] = arr[j];
@@ -72,7 +72,7 @@ function bubbleSortOpt2(arr) {
             }
         }
         // 记录本轮结束后，无序区域的边界
-        sortedBorder = lastExchangeIndex;
+        unsortedBorder = lastExchangeIndex;
         // 如果本轮没有交换，则说明序列已经有序，没必要进行后续的比较了
         if (sorted) {
             break;

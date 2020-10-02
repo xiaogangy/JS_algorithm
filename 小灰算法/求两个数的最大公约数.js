@@ -28,6 +28,7 @@ function getGreatestCommonDivisionV2(a, b) {
     let big = a > b ? a : b;
     let small = a < b ? a : b;
     // 写递归，先写终止条件
+    // 其实这里写big % small === 0作为递归条件也是一样的
     if (big === small) {
         return small;
     }

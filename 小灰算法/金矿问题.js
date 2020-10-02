@@ -97,6 +97,7 @@ function getBestGoldMining_Opt(n, w, g, p) {
  * 解法三：以上的方法是声明一个二维数组，然后依次进行填充，空间复杂度为O(n * w);
  * 但是事实上，并不需要使用一个完整的二维数组，以上的计算我们会发现，我们计算一行的时候，只会用到上一行的值，
  * 因此，我们可以声明一个一维数组，用来保存上一行的数据，然后每次写入新一行数据的时候，从右往左覆盖旧的数据。
+ * 为什么要从右往左呢？因为在状态转移方程中result[i - 1][j - p[i - 1]] + g[i - 1]这一项中，我们要用到上一行的旧值
  * 这样的话，时间复杂度可以降低到O(w)；
  *
  * @param {*} n 金矿数量
@@ -111,6 +112,8 @@ function getBestGoldMining_final(n, w, g, p) {
     for (let i = 1; i < n + 1; i++) {
         for (let j = w; j > 0; j--) {
             // 这里会发现只判断了一种情况，这是因为当不满足该条件时，即当前工人数量不足以开采当前矿，则收益等于result[j] = result[j]，不变
+            // 最初写这里会想，是否需要初始化第一行的数据，但是仔细想了一下，其实是不用的。因为在填充第一行的时候，只有一个金矿可供选择，因此选择
+            // 这个金矿一定就是得到的最大获利
             if (j >= p[i - 1]) {
                 result[j] = Math.max(result[j], result[j - p[i - 1]] + g[i - 1]);
             }
@@ -123,6 +126,7 @@ function testFunc() {
     let w = 10;
     let g = [400, 500, 200, 300, 350];
     let p = [5, 5, 3, 4, 3];
+    console.log('最佳收益为', getBestGoldMining_Opt(g.length, w, g, p));
     console.log('最佳收益为', getBestGoldMining_final(g.length, w, g, p));
 }
 

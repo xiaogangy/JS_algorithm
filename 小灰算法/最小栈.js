@@ -26,7 +26,6 @@ class Stack {
         if ((!lengthA && !lengthB) || (this.stackB[lengthB - 1] >= data)) {
             this.stackA.push(data);
             this.stackB.push(data);
-            return;
         } else {
             // 否则只压入栈A
             this.stackA.push(data);

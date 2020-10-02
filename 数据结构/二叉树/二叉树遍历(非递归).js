@@ -60,7 +60,8 @@ function inOrderTraverse(rootNode) {
 
     while (currentNode !== null || !stack.isEmpty()) {
         while (currentNode !== null) {
-            // 先入栈，出栈的时候再输出
+            // 本质上要先找到树的最左子节点，才能开始真正的中序遍历
+            // 因此先不要输出，只是想让每个节点进栈，保存历史信息
             stack.push(currentNode);
             currentNode = currentNode.leftChild;
         }
@@ -113,6 +114,7 @@ function postOrderTraverse2(rootNode) {
     while (currentNode !== null || stack.length > 0) {
         while (currentNode !== null) {
             stack.push(currentNode);
+            // 等同于直接console.log的操作，但是这里要最后反转一次，所以先不要输出
             values.push(currentNode.data);
             currentNode = currentNode.rightChild;
         }
@@ -134,10 +136,10 @@ function levelOrderTraverse(rootNode) {
     while (!queue.isEmpty()) {
         const pollElement = queue.poll();
         console.log(pollElement.data);
-        if (!!pollElement.leftChild) {
+        if (pollElement.leftChild) {
             queue.offer(pollElement.leftChild);
         }
-        if (!!pollElement.rightChild) {
+        if (pollElement.rightChild) {
             queue.offer(pollElement.rightChild);
         }
     }

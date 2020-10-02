@@ -1,6 +1,6 @@
 /**
  * @description Bitmap算法
- * Bitmap算法，即位图算法，指的是用一个bit位用来存储一个数据的方法。有点类似于计数排序，这种方式也是借助了使用索引来定位元素的思路。举例来说，[2, 1, 4, 7]这个数据
+ * Bitmap算法，即位图算法，指的是用一个bit位来存储一个数据的方法。有点类似于计数排序，这种方式也是借助了使用索引来定位元素的思路。举例来说，[2, 1, 4, 7]这个数据
  * 如果用数组来存储的话，数组中每个数都是一个number类型，我们知道JS中一个number类型使用的长度是64位，即8个字节，而使用bitmap存储的思路为：
  * 先声明一个8位的bitmap，这8个bit初始时内容为0|0|0|0|0|0|0|0，从右向左开始看，每一位分别对应着从0到7的number数值，初始时全为0，表示目前bitmap中没有任何数值。
  * 插入数值2，从右开始，第三位表示数值2，将该位的0变为1，表示存储了2个数值，同理，存储剩余的数值，则bitmap变为1|0|0|1|0|1|1|0，即可表示存储了如上数组，这样的话，我们总共使用了
@@ -23,8 +23,8 @@ function createBitmap(size) {
     const words = new Array(getWordIndex(size - 1) + 1).fill(0);
 
     /**
-     * 定位bitmap某一位所对应的word
-     * @param {*} bitIndex 位图的第bitIndex位
+     * 定位某个数所在的word
+     * @param {*} bitIndex 某个数值，例如64，就表示64这个数，实际上是从右往左数的第65位
      * @return {number} 返回对应word的索引
      */
     function getWordIndex(bitIndex) {
@@ -35,7 +35,7 @@ function createBitmap(size) {
 
     /**
      * 判断bitmap某一位的状态
-     * @param {*} bitIndex 位图的第bitIndex位
+     * @param {*} bitIndex 位图的第bitIndex位（从0开始）
      * @return {boolean} 返回true表示，该位置有值，false相反
      */
     function getBit(bitIndex) {
@@ -45,13 +45,13 @@ function createBitmap(size) {
         const wordIndex = getWordIndex(bitIndex);
         // 这里的逻辑其实很简单，要判断某一个bit位是否为1，只需要构造一个在那一位为1，其余位都为0的数，然后用这个数与bitmap做与运算
         // 下面的代码之所以还要读取words[wordIndex]，这是因为number类型在进行左移位运算时，如果位移的长度大于存储长度，会做取余处理
-        // 即1<<65  等价于  1<<1
+        // 即1<<64  等价于  1<<1，1<<65 等价于 1<<2
         return (words[wordIndex] & (1 << bitIndex)) !== 0;
     }
 
     /**
      * 把bitmap某一位设置为true
-     * @param {*} bitIndex 位图的第bitIndex位
+     * @param {*} bitIndex 位图的第bitIndex位（从0开始）
      */
     function setBit(bitIndex) {
         if (bitIndex < 0 || bitIndex > capacity) {

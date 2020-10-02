@@ -145,6 +145,7 @@ function aStarSearch(start, end) {
         }
 
         // 4. 如果终点出现在openList中，直接返回终点格子
+        // 这一步其实可以放到步骤3中，但是为了逻辑分开理解的清楚一些，就先放到这儿吧
         for (let i in openList) {
             const grid = openList[i];
             if (grid.x === end.x && grid.y === end.y) {
@@ -162,11 +163,18 @@ function testFunc() {
     const endGrid = new Grid(2, 5);
 
     let resultGrid = aStarSearch(startGrid, endGrid);
+    const copy = JSON.parse(JSON.stringify(MAZE));
     // 回溯迷宫路径
     while (resultGrid.parent) {
-        console.log(`[${resultGrid.x}, ${resultGrid.y}]`);
+        const x = resultGrid.x;
+        const y = resultGrid.y;
+        copy[x][y] = '-';
+        console.log(`[${x}, ${y}]`);
         resultGrid = resultGrid.parent;
     }
+    copy.forEach(element => {
+       console.log(JSON.stringify(element));
+    });
 }
 
 testFunc();

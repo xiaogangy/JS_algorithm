@@ -119,7 +119,7 @@ function quickSort_2(arr, startIndex, endIndex) {
 function partition_2(arr, startIndex, endIndex) {
     // 基准值
     let pivot = arr[startIndex];
-    // 定义mark变量，用来追踪小于基准值的最后一个元素
+    // 定义mark变量，用来追踪小于等于基准值的最后一个元素
     let mark = startIndex;
     for (let i = startIndex + 1; i <= endIndex; i++) {
         // 当遍历的元素小于基准元素时，要交换

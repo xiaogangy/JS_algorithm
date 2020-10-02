@@ -19,12 +19,12 @@ function Node(data) {
 // 考虑两个在操场跑步的人A和B，如果B的倍速是A的2倍，两个人从起点开始跑步，那么B肯定会再次追上A，第一次追上时差值最小，差值为一圈。也就是两人会在跑道起点再次相遇
 // 借助这个思路，设置两个指针，一个走2步，一个走1步，如果二者会相遇，那么肯定是有环的
 function hasCycle(head) {
-    let first = head;
-    let second = head;
-    while (second !== null && second.next !== null) {
-        first = first.next;
-        second = second.next.next;
-        if (first === second) {
+    let slow = head;
+    let fast = head;
+    while (fast !== null && fast.next !== null) {
+        slow = slow.next;
+        fast = fast.next.next;
+        if (fast === slow) {
             return true;
         }
     }
@@ -35,17 +35,17 @@ function hasCycle(head) {
  * 引申1：如果有环，如何判断环的长度？
  * 思路：如果有环，让他俩从第一次相遇开始，继续走，下一次相遇的时候，B比A刚好多走了一圈，这就是环的长度。那么这个长度等于多少呢？因为A每次走一步，可以统计A的前进次数，就是环的长度。
  */
-// 参数如第一次相遇的节点，即继续开始走的起点
+// 参数为第一次相遇的节点，即继续开始走的起点
 function cycleLength(start) {
     // 记录A走的步数
     let length = 0;
-    let first = start;
-    let second = start;
-    while (second !== null && second.next !== null) {
+    let slow = start;
+    let fast = start;
+    while (fast !== null && fast.next !== null) {
         length++;
-        first = first.next;
-        second = second.next.next;
-        if (first === second) {
+        slow = slow.next;
+        fast = fast.next.next;
+        if (slow === fast) {
             return length;
         }
     }
@@ -59,6 +59,9 @@ function cycleLength(start) {
  * 这个公式说明了什么呢？如果让在二者相遇处和链表起点分别放一个指针，两个指针每次都只前进一步，那么当他们相遇时候的位置，就是入环切点。
  * 这里难理解的地方是，一开始我总认为n是一个变量，是一个不确定的值，但是其实n是一个定值，可以假定它为任何一个值，那么上述公式在A和B相遇时
  * 仍然是成立的，那么公式右边的意思是，绕了n圈（此时仍在原来的位置），然后继续前进了S2步，这就刚好是我们一开始设定的到达入环节点的距离；
+ * 2020-10-02: 再一次看这个公式，发现有个更好理解的方向。D = (n-1)*(S1+S2) + S2，我们不必关心n具体等于多少，这个公式告诉我们，从相遇
+ * 位置放一个点，从起点放一个点，二者保持一样的速度，总会相遇的。比如说，D很长，S2很短，肯定环内的点走完一圈，D上的点还没到入环口，但是我们不用
+ * 担心，就让他们继续走就完了，走个(n - 1)圈肯定会相遇的，这个n等于多少我们并不关心，但是一定会相遇！相遇的点就是入环点。
  */
 /**
  * 

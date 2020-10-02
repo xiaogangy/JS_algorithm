@@ -38,7 +38,7 @@ function createBinaryTree(inputList) {
 
 // 前序遍历：根 -》 左 -》右
 function preOrderTraverse(rootNode) {
-    // 即是健壮性判断，也是递归的出口
+    // 既是健壮性判断，也是递归的出口
     if (rootNode === null) {
         return;
     }
