@@ -13,7 +13,7 @@ function selectSort(arr) {
         let max = arr[0];
         let maxIndex = 0;
         // 内层循环控制比较的次数
-        for (let j = 0; j <= length - i - 1; j++) {
+        for (let j = 1; j <= length - i - 1; j++) {
             if (arr[j] > max) {
                 max = arr[j];
                 maxIndex = j;

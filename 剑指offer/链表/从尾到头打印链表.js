@@ -19,6 +19,18 @@ function solution(head) {
     return array.reverse();
 }
 
+/**
+ * 或者使用递归的思想来做，先输出头节点后面的所有节点，再输出头结点
+ * @param {*} head 头节点
+ */
+function recursiveOutput(head) {
+    if (!head) {
+        return;
+    }
+    recursiveOutput(head.next);
+    console.log(head.val);
+}
+
 const node1 = new ListNode(1);
 const node2 = new ListNode(2);
 const node3 = new ListNode(3);
@@ -29,3 +41,4 @@ node2.next = node3;
 node3.next = node4;
 node4.next = node5;
 console.log(solution(node1));
+console.log(recursiveOutput(node1));
