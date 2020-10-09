@@ -75,4 +75,4 @@ function testFunc() {
     const size = 3;
     console.log(maxInWindows(numbers, size));
 }
-testFunc()
+testFunc();

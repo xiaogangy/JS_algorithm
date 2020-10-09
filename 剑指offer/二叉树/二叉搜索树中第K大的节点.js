@@ -37,6 +37,60 @@ function inOrderTrans(pRoot, result) {
     inOrderTrans(pRoot.right, result);
 }
 
+/**
+ * 从根节点出发，找到第k大的的节点
+ * @param {*} pRoot 根节点
+ * @param {*} k k值
+ * @return {node} 第K大的节点
+ */
+function solution2(pRoot, k) {
+    if (!pRoot || k <= 0) {
+        return null;
+    }
+    const info = {
+        k
+    };
+    return kthNode2(pRoot, info);
+}
+
+/**
+ * 在之前的方法中，我们先用中序遍历完成了对树的所有节点访问，时间复杂度为O(n)，空间复杂度也是为O(n)（不包含递归调用栈的空间，这里只说借用的存储节点的数组）。
+ * 其实我们并不需要完全遍历完二叉树，因为可能在遍历根节点的左子树时候就已经找到了第K大的节点；同时，我们在访问的过程中就可以进行计数，这样也不需要一个额外的数组来保存
+ * 遍历过的节点，这样空间复杂度和时间复杂度都降低了不少。
+ * 这个函数的作用就是从pRoot节点出发，找到第K大的节点
+ * @param {*} pRoot 根节点
+ * @param {*} info 保存k的信息，因为涉及到递归中修改，所以把k放到一个对象中
+ * @return {node} 找到的节点
+ */
+function kthNode2(pRoot, info) {
+    // 递归出口 && 健壮性判断
+    if (!pRoot) {
+        return null;
+    }
+
+    let target = null;
+
+    // 左子树
+    target = kthNode2(pRoot.left, info);
+
+    // 根节点
+    if (!target) {
+        if (info.k === 1) {
+            target = pRoot;
+            return target;
+        } else {
+            info.k--;
+        }
+    }
+
+    // 右子树
+    if (!target) {
+        target = kthNode2(pRoot.right, info);
+    }
+
+    return target;
+}
+
 function testFunc() {
     const node1 = new TreeNode(5);
     const node2 = new TreeNode(3);
@@ -52,5 +106,6 @@ function testFunc() {
     node3.left = node6;
     node3.right = node7;
     console.log(kthNode(node1, 3));
+    console.log(solution2(node1, 3));
 }
 testFunc();

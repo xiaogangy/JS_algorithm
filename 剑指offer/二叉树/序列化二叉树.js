@@ -29,7 +29,7 @@ function serialize(pRoot) {
     // 即是健壮性的判断，也是递归的终止条件
     if (!pRoot) {
         list.push('$');
-        return list.join(',');
+        return;
     }
     // 前序遍历：先把根节点插入到结果数组中
     list.push(pRoot.val);
