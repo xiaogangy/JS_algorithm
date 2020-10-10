@@ -84,7 +84,6 @@ function partition(array, start, end) {
 /**
  * 上浮操作
  * @param  {Arry} list    待调整的二叉堆（数组）
- * @return {[type]}      [description]
  */
 function upAdjust(list) {
     let childIndex = list.length - 1;
@@ -107,7 +106,6 @@ function upAdjust(list) {
 /**
  * 下沉操作
  * @param  {[type]} list        二叉堆
- * @return {[type]}             [description]
  */
 function downAdjust(list) {
     const length = list.length;
@@ -133,7 +131,7 @@ function downAdjust(list) {
     list[parentIndex] = temp;
 }
 
-//solution2: 牛逼的二叉堆来了
+// solution2: 牛逼的二叉堆来了
 function solution2(input, k) {
     const length = input.length;
     // 健壮性走一波

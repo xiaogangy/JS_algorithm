@@ -23,6 +23,7 @@
 /**
  * 查找指定数组的逆序对数量
  * @param {*} data 待查找的数组
+ * @return {number} 逆序对数量
  */
 function inversePairs(data) {
     // 递归出口：如果数组没有元素或者只有一个元素，直接返回0

@@ -89,7 +89,7 @@ function getFirstChar() {
 function testFunc() {
     // const str = 'abaccdeff';
     // console.log(solution(str));
-    'helloworld'.split('').forEach((char) => {
+    'helloworld'.split('').forEach(char => {
         insert(char);
         console.log(getFirstChar());
     });

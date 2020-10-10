@@ -12,7 +12,6 @@
 /**
  * 上浮操作
  * @param  {Arry} list    待调整的二叉堆（数组）
- * @return {[type]}      [description]
  */
 function upAdjust(list) {
     let childIndex = list.length - 1;
@@ -38,7 +37,6 @@ function upAdjust(list) {
  * @param  {[type]} list        二叉堆
  * @param  {[type]} parentIndex 当前要下沉的节点
  * @param  {[type]} length      二叉堆的长度
- * @return {[type]}             [description]
  */
 function downAdjust(list, parentIndex, length) {
     let childIndex = 2 * parentIndex + 1;
@@ -66,7 +64,6 @@ function downAdjust(list, parentIndex, length) {
 /**
  * 构建二叉堆，从最后一个非叶子节点开始，依次做下沉操作
  * @param  {[type]} list 待调整的二叉堆（数组）
- * @return {[type]}      [description]
  */
 function buildBinaryHeap(list) {
     for (let i = Math.floor((list.length - 1 - 1) / 2); i >= 0; i--) {

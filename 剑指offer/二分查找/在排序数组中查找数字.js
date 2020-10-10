@@ -34,6 +34,8 @@ function getNumberOfK(data, k) {
  *
  * @param {*} data 数组
  * @param {*} k 待查找元素
+ * @param {*} left 左边界
+ * @param {*} right 右边界
  * @return {number} 第一个等于k的元素位置
  */
 function getFirstK(data, k, left, right) {
@@ -66,6 +68,8 @@ function getFirstK(data, k, left, right) {
  *
  * @param {*} data 数组
  * @param {*} k 待查找元素
+ * @param {*} left 左边界
+ * @param {*} right 右边界
  * @return {number} 最后一个等于k的元素位置
  */
 function getLastK(data, k, left, right) {

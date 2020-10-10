@@ -8,7 +8,7 @@
 
 /**
  * 解法1：哈希表
- * @param {*} numbers 
+ * @param {*} numbers 数组
  * @param {*} duplication 把重复的值，放到duplication[0]中
  */
 function duplicate(numbers, duplication) {
@@ -16,12 +16,13 @@ function duplicate(numbers, duplication) {
     if (!numbers || !numbers.length) {
         return false;
     }
+    const length = numbers.length;
     for (let i = 0; i < length; i++) {
         if (numbers[i] < 0 || numbers[i] > length - 1) {
             return false;
         }
     }
-    const length = numbers.length;
+
     const hashTable = {};
     for (let i = 0; i < length; i++) {
         const current = numbers[i];
@@ -34,6 +35,7 @@ function duplicate(numbers, duplication) {
     // 走到这儿，说明肯定没找到，直接返回false
     return false;
 }
+
 /**
  * 解法2：哈希表虽然可以实现在O(N)时间内解决问题，但是空间复杂度也变成了o(n)，而且也没有充分利用到题目中的第一个条件，即
  * n个数字都在0~n-1之间。那么我们换种思路来看这道题，n个数字都在0~n-1之间，这个说明了什么呢？如果没有重复的话，那么每个数
@@ -50,12 +52,13 @@ function duplicate2(numbers, duplication) {
     if (!numbers || !numbers.length) {
         return false;
     }
+    const length = numbers.length;
     for (let i = 0; i < length; i++) {
         if (numbers[i] < 0 || numbers[i] > length - 1) {
             return false;
         }
     }
-    const length = numbers.length;
+
     for (let i = 0; i < length;) {
         const currentValue = numbers[i];
         // 1. 当前位置的值和索引值相等

@@ -37,7 +37,7 @@ function getUglyNumber(index) {
     // 下一个丑数
     let next = null;
 
-    for (let i = 1; i <= index; i++) {
+    for (let i = 1; i < index; i++) {
         next = Math.min(2 * numbers[T2], 3 * numbers[T3], 5 * numbers[T5]);
         numbers.push(next);
         // 更新追踪节点
