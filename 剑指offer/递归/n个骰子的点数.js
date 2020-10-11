@@ -52,6 +52,8 @@ function solution1(n) {
 /**
  * 求扔n个骰子可以出现的点数和情况，并更新概率
  * 写递归一定要注意这一点：在写函数之前要明确你这个函数是干啥的
+ * 
+ * @param {*} number 总共有几个骰子
  * @param {*} step 当前要扔第几个骰子
  * @param {*} currentSum 之前骰子构成的点数和
  * @param {*} probabilities 概率数组
