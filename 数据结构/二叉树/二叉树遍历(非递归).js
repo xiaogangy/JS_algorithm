@@ -34,6 +34,7 @@ function createBinaryTree(list) {
 }
 
 // 前序遍历：根节点 -> 左节点 -> 右节点
+// 代码的重点是：遇见节点的时候，就算访问过，即输出；把node保存到栈中只是为了方便找右节点
 function preOrderTraverse(rootNode) {
     const stack = createStack(20);
     let currentNode = rootNode;
@@ -54,6 +55,7 @@ function preOrderTraverse(rootNode) {
 }
 
 // 中序遍历: 左节点 -> 根节点 -> 右节点
+// 不同于前序遍历，遇见节点的时候不算访问过，要先入栈，弹出栈的时候才算访问过这个节点了；
 function inOrderTraverse(rootNode) {
     const stack = createStack(20);
     let currentNode = rootNode;
@@ -135,6 +137,7 @@ function levelOrderTraverse(rootNode) {
     !!rootNode && queue.offer(rootNode);
     while (!queue.isEmpty()) {
         const pollElement = queue.poll();
+        // 注意这里，入队不叫访问过，弹出的时候才算访问过了
         console.log(pollElement.data);
         if (pollElement.leftChild) {
             queue.offer(pollElement.leftChild);
