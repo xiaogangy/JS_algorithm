@@ -17,11 +17,11 @@ function findNearsetNumber(number) {
     const list = String(number).split('').map(int => parseInt(int, 10));
     const length = list.length;
 
-    // 1. 先找逆序区域，找到逆序区域的前一位
+    // 1. 从后向前找逆序区域，遇到逆序区域就停止
     let index = 0;
     for (let i = length - 1; i > 0; i--) {
         if (i - 1 >= 0 && list[i] > list[i - 1]) {
-            // 注意这里是把逆序区域的第一位index传回去了
+            // 注意这里是把升序区域的第一位index传回去了
             index = i;
             break;
         }

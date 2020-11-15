@@ -29,7 +29,7 @@ function removeKDigits(number, k) {
         throw new Error('删除的位数过多');
     }
 
-    // 双重循环，外层控制删除的个数，内存遍历数组
+    // 双重循环，外层控制删除的个数，内层遍历数组
     for (let i = k; i > 0; i--) {
         // 用于标识是否找到了一个逆序的数字
         let hasCut = false;

@@ -32,6 +32,7 @@ class PriorityQueue {
         const head = this.array[0];
         const tail = this.array[--this.size];
         this.array[0] = tail;
+        this.array.pop();
 
         this.downAdjust();
         return head;
@@ -90,7 +91,9 @@ function testFunc() {
     pQueue.enQueue(2);
     pQueue.enQueue(19);
     console.log('出队元素', pQueue.deQueue());
+    console.log('after', pQueue.array);
     console.log('出队元素', pQueue.deQueue());
+    console.log('after', pQueue.array);
 }
 
 testFunc();

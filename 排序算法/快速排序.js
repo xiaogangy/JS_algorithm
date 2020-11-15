@@ -21,7 +21,7 @@ function quickSort_draft(arr, startIndex, endIndex) {
     if (left >= right) {
         return;
     }
-    // 进行双边循环
+    // 进行双边循环（终止条件是left === right）
     while (left < right) {
         while (left < right && arr[left] <= pivot) {
             left++;
@@ -157,6 +157,7 @@ function quickSort_stack(arr, startIndex, endIndex) {
         end: endIndex
     };
     stack.push(obj);
+    // 这他娘的看着就是二叉树的层序遍历啊，要啥stack，队列就稳稳的
     while (!stack.isEmpty()) {
         const top = stack.pop();
         let pivot = partition_2(arr, top.start, top.end);

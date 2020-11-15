@@ -112,9 +112,8 @@ function getBestGoldMining_final(n, w, g, p) {
     for (let i = 1; i < n + 1; i++) {
         for (let j = w; j > 0; j--) {
             // 这里会发现只判断了一种情况，这是因为当不满足该条件时，即当前工人数量不足以开采当前矿，则收益等于result[j] = result[j]，不变
-            // 最初写这里会想，是否需要初始化第一行的数据，但是仔细想了一下，其实是不用的。因为在填充第一行的时候，只有一个金矿可供选择，因此选择
-            // 这个金矿一定就是得到的最大获利
             if (j >= p[i - 1]) {
+                // result = max(不选，选)
                 result[j] = Math.max(result[j], result[j - p[i - 1]] + g[i - 1]);
             }
         }
