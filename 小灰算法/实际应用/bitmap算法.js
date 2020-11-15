@@ -11,6 +11,8 @@
  * - 海量数据去重
  * - 海量数据查找非重复的数值（借助两个bitmap，第一个bitmap仍然存储是否存在，第二个bitmap存储该值出现的次数，可以用0表示出现了多次，1表示出现了1次，然后二者做与运算）
  * - 海量数据排序，即放大版的计数排序
+ *
+ * @11.16: 以下64位左移有误，因为JS对右运算符超过5bit时候时候会截断，所以其实最多只能比较32位，因此getBit和setBit方法都有点问题，解决办法是把32位数字当成一个word。
  */
 
 function createBitmap(size) {
@@ -45,7 +47,7 @@ function createBitmap(size) {
         const wordIndex = getWordIndex(bitIndex);
         // 这里的逻辑其实很简单，要判断某一个bit位是否为1，只需要构造一个在那一位为1，其余位都为0的数，然后用这个数与bitmap做与运算
         // 下面的代码之所以还要读取words[wordIndex]，这是因为number类型在进行左移位运算时，如果位移的长度大于存储长度，会做取余处理
-        // 即1<<64  等价于  1<<1，1<<65 等价于 1<<2
+        // 即1<<64  等价于  1<<0，1<<65 等价于 1<<1
         return (words[wordIndex] & (1 << bitIndex)) !== 0;
     }
 
