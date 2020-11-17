@@ -28,7 +28,12 @@ function TreeNode(x) {
  * @return {boolean} 是否是对称二叉树
  */
 function isSymmetrical(pRoot) {
-    return twoTreesAreSymmetrical(pRoot, pRoot);
+    // 其实最好不要这样写，因为树会比较两遍，改成下方的比较好
+    // return twoTreesAreSymmetrical(pRoot, pRoot);
+    if (!pRoot) {
+        return false;
+    }
+    return twoTreesAreSymmetrical(pRoot.left, pRoot.right);
 }
 
 /**

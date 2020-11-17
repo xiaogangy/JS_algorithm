@@ -42,7 +42,7 @@ function getNext(pNode) {
         }
         return pCurrent;
     }
-    // 2. 当前节点没有左子树(包含了两种情况，当前节点是父节点的左节点或者右节点)
+    // 2. 当前节点没有右子树(包含了两种情况，当前节点是父节点的左节点或者右节点)
     let pParent = pCurrent.next;
     while (pParent && pCurrent === pParent.right) {
         pCurrent = pParent;

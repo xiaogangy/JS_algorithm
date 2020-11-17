@@ -12,11 +12,12 @@
  * 学会自己思考，多看别人的解题思路，才会有进步滴！
  */
 
-/* function TreeNode(x) {
+function TreeNode(x) {
     this.val = x;
     this.left = null;
     this.right = null;
-} */
+}
+
 function Convert(pRootOfTree) {
     // 空树直接返回
     if (!pRootOfTree) {
@@ -50,3 +51,56 @@ function inOrderTrans(root, array) {
     array.push(root);
     inOrderTrans(root.right, array);
 }
+
+
+// 下面再用递归思路实现一遍
+function solution2(root) {
+    if (!root) {
+        return null;
+    }
+    return recursive(root).begin;
+}
+
+function recursive(root) {
+    if (root === null) {
+        return null;
+    }
+    if (!root.left && !root.right) {
+        return {
+            begin: root,
+            end: root
+        };
+    }
+    const left = recursive(root.left);
+    const right = recursive(root.right);
+
+    if (left) {
+        root.left = left.end;
+        left.end.right = root;
+    }
+    if (right) {
+        root.right = right.begin;
+        right.begin.left = root;
+    }
+
+    return {
+        begin: left ? left.begin : root,
+        end: right ? right.end : root
+    }
+}
+
+function testFunc() {
+    const node1 = new TreeNode(1);
+    const node2 = new TreeNode(2);
+    const node3 = new TreeNode(3);
+    const node4 = new TreeNode(4);
+    const node5 = new TreeNode(5);
+    const node6 = new TreeNode(6);
+    node3.left = node2;
+    node3.right = node5;
+    node2.left = node1;
+    node5.left = node4;
+    node5.right = node6;
+    console.log(tryAnother(node3));
+}
+testFunc();
