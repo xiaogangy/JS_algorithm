@@ -10,7 +10,7 @@
 function hasCycle(head) {
     let slow = head;
     let fast = head;
-    while (fast.next && fast.next.next) {
+    while (fast && fast.next && fast.next.next) {
         slow = slow.next;
         fast = fast.next.next;
         if (fast === slow) {
@@ -27,7 +27,7 @@ function hasCycle(head) {
 function cycleLength(head) {
     let first = head;
     let second = head;
-    while (second.next !== null && second.next.next !== null) {
+    while (second && second.next && second.next.next) {
         first = first.next;
         second = second.next.next;
         if (first === second) {

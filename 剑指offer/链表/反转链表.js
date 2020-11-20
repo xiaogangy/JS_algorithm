@@ -10,35 +10,45 @@
 /**
  * 反转链表
  * @param {*} head 链表头结点
+ * @return {Object} 新头结点
  */
 function reverseLinkedList(head) {
+    // 空链表
+    if (!head) {
+        return null;
+    }
 
     let pre = null;
     let current = head;
-    // 空链表
-    if (!current) {
-        return null;
+    while (current) {
+        // 先保存下一个节点，防止链表断裂
+        const next = current.next;
+        // 反转
+        current.next = pre;
+        // 更新追踪节点
+        pre = current;
+        current = next;
     }
-    let next = current.next;
-    // 单节点链表
-    if (!next) {
+
+    return pre;
+}
+
+// 递归版
+function recursiveReverse(head) {
+    // 健壮性 && 递归出口
+    if (!head.next) {
         return head;
     }
 
-    // 遍历链表，进行反转
-    while (current) {
-        // 反转当前链表
-        current.next = pre;
-        // 更新各个追踪节点
-        pre = current;
-        current = next;
-        // 要考虑最后一个节点的情况
-        next = current && current.next;
-    }
-    return pre;
+    // 链表本身就是一个递归结构，先对链表的后半部分进行反转
+    const newHead = recursiveReverse(head.next);
+    // 考虑反转完的结构：返回了链表后半段反转结果的头节点，此时要把当前的头结点和后面链表的尾结点连接起来
+    // 此时head节点的next指针扔指向现在已作为后半段链表尾结点的节点
+    head.next.next = head;
+    head.next = null;
 
+    return newHead;
 }
-
 
 function Node(val) {
     this.val = val;
@@ -56,5 +66,6 @@ function testFunc() {
     node3.next = node4;
     node4.next = node5;
     console.log(reverseLinkedList(node1));
+    console.log(recursiveReverse(node1));
 }
 testFunc();

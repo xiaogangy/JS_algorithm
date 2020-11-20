@@ -28,7 +28,7 @@ function solution(str) {
     const first = str.slice(start, ePos);
     let result = str2Int(first);
     const second = str.slice(ePos + 1);
-    result = result * Math.pow(10, second);
+    result = result * Math.pow(10, second); // Math.pow这个方法会直接把第二个参数变为number类型
     // 记得以'-'开头的字符串，要是负数
     result = str[0] === '-' ? -result : result;
 
@@ -46,7 +46,7 @@ function str2Int(str) {
 }
 
 function testFunc() {
-    const str = '-123';
+    const str = '123e1';
     console.log(solution(str));
 }
 testFunc();

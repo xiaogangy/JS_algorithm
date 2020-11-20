@@ -74,6 +74,7 @@
 
 同样的，这二者也是只是匹配位置，不用于零宽断言是是，这两个是“排除模式”，表示某个位置不能是某个pattern
 
+![零宽断言](../../imgs/正则.png)
 
 ## 贪婪与懒惰
 - 贪婪匹配：当正则表达式中包含能接受重复的限定符时，通常的行为是（在使整个表达式能得到匹配的前提下）匹配尽可能多的字符。以这个表达式为例：`a.*b`，它将会匹配最长的以a开始，以b结束的字符串。如果用它来搜索aabab的话，它会匹配整个字符串aabab。
@@ -104,7 +105,7 @@
 
 ## 参考文章：
 [正则表达式30分钟入门](https://deerchao.cn/tutorials/regex/regex.htm)  
-强烈推荐： [MDN-正则表达式](https://deerchao.cn/tutorials/regex/regex.htm)  
+强烈推荐： [MDN-正则表达式](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Regular_Expressions)  
 [Learn Regular Expressions In 20 Minutes](https://www.youtube.com/watch?v=rhzKDrUiJVk)  
 
 在线测试正则表达式：  

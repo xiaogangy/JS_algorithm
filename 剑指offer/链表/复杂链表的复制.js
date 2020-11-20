@@ -108,7 +108,7 @@ function cloneNodes(pHead) {
 function connectRandomNodes(pHead) {
     // 声明追踪节点
     let pNode = pHead;
-    
+
     while (pNode) {
         const pClonedNode = pNode.next;
         if (pNode.random) {

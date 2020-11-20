@@ -86,7 +86,7 @@ function recursive(root) {
     return {
         begin: left ? left.begin : root,
         end: right ? right.end : root
-    }
+    };
 }
 
 function testFunc() {
@@ -101,6 +101,6 @@ function testFunc() {
     node2.left = node1;
     node5.left = node4;
     node5.right = node6;
-    console.log(tryAnother(node3));
+    console.log(solution2(node3));
 }
 testFunc();

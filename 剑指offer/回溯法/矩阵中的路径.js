@@ -35,7 +35,7 @@ function hasPath(matrix, target) {
             }
         }
     }
-    // for循环执行完都没退出，则肯定是没找，直接返回false
+    // for循环执行完都没退出，则肯定是没找到，直接返回false
     return false;
 
 }
