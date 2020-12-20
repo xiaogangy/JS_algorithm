@@ -13,6 +13,7 @@
  * - 海量数据排序，即放大版的计数排序
  *
  * @11.16: 以下64位左移有误，因为JS对右运算符超过5bit时候时候会截断，所以其实最多只能比较32位，因此getBit和setBit方法都有点问题，解决办法是把32位数字当成一个word。
+ * 可以参考这篇文章的思路，把高位的32位和低位的32位分别拆开来计算，计算完再补回去。https://blog.csdn.net/LingXi__Y/article/details/82022828
  */
 
 function createBitmap(size) {
