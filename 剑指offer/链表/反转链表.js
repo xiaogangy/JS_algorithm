@@ -43,7 +43,7 @@ function recursiveReverse(head) {
     // 链表本身就是一个递归结构，先对链表的后半部分进行反转
     const newHead = recursiveReverse(head.next);
     // 考虑反转完的结构：返回了链表后半段反转结果的头节点，此时要把当前的头结点和后面链表的尾结点连接起来
-    // 此时head节点的next指针扔指向现在已作为后半段链表尾结点的节点
+    // 此时head节点的next指针仍指向现在已作为后半段链表尾结点的节点
     head.next.next = head;
     head.next = null;
 

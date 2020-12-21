@@ -53,7 +53,11 @@ function inOrderTrans(root, array) {
 }
 
 
-// 下面再用递归思路实现一遍
+/**
+ * 方法二：思路还是递归，先将左子树变成排序双向链表，再将右子树变成双向链表，然后二者和中点值连起来
+ * @param {*} root 根节点
+ * @return {*} 新的根节点
+ */
 function solution2(root) {
     if (!root) {
         return null;
@@ -89,6 +93,44 @@ function recursive(root) {
     };
 }
 
+/**
+ * 方法3：这种方法记录了last指针，抽象性更强
+ * @param {*} root 根节点
+ * @return {Object} 新的头节点
+ */
+function recursiveMethod(root) {
+    if (!root) {
+        return null;
+    }
+    let head = {
+        newHead: null
+    };
+    const last = {
+        val: null
+    };
+    connect(root, last, head);
+    return head.newHead;
+}
+
+function connect(root, last, head) {
+    if (!root) {
+        return;
+    }
+    // 1. 先把左边的变成有序链表
+    connect(root.left, last, head);
+    // 2. 把last和当前root节点连起来，并更新last
+    if (!last.val) {
+        last.val = root;
+        head.newHead = root;
+    } else {
+        const lastNode = last.val;
+        lastNode.right = root;
+        root.left = lastNode;
+        last.val = root;
+    }
+    connect(root.right, last, head);
+}
+
 function testFunc() {
     const node1 = new TreeNode(1);
     const node2 = new TreeNode(2);
@@ -101,6 +143,7 @@ function testFunc() {
     node2.left = node1;
     node5.left = node4;
     node5.right = node6;
-    console.log(solution2(node3));
+    // console.log(solution2(node3));
+    console.log(recursiveMethod(node3));
 }
 testFunc();
