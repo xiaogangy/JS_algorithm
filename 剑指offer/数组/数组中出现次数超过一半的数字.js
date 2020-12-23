@@ -108,7 +108,7 @@ function partition(array, start, end) {
     let right = end;
     while (left !== right) {
         // 顺序很重要，要先从右边开始往左找，原因自己分析一个极端情况就知道了
-        while (left < right && array[right] >= pivot) {
+        while (left < right && array[right] > pivot) {
             right--;
         }
         while (left < right && array[left] <= pivot) {

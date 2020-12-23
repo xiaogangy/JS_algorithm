@@ -20,7 +20,7 @@ function solution(array) {
         const number = array[i];
         let bitMask = 1;
         // 这种方法只能用于找到那个出现一次的数字，是用32位能表示的数字
-        for (let j = 31; j > 0; j--) {
+        for (let j = 31; j >= 0; j--) {
             let bit = number & bitMask;
             if (bit) {
                 count[j] += 1;

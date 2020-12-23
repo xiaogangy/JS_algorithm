@@ -81,10 +81,8 @@ function hasPathCore(x, y, str, matrix, isVisitedArray, rows, columns) {
         // 从当前节点出发是否可以找到一条有效路径呢？
         hasFound = topHasPath || bottomHasPath || leftHasPath || rightHasPath;
 
-        // 如果从这个点出发，没找到指定的路径，则把这个节点是否访问过重置为false，这是为了保证当前节点作为另外一条路径上的节点被访问到时，仍然是可访问的
-        if (!hasFound) {
-            isVisitedArray[x][y] = false;
-        }
+        // 把这个节点是否访问过重置为false，这是为了保证当前节点作为另外一条路径上的节点被访问到时，仍然是可访问的
+        isVisitedArray[x][y] = false;
     }
 
     return hasFound;

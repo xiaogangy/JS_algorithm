@@ -1,6 +1,6 @@
 /**
  * 上浮操作
- * @param  {Arry} list    待调整的二叉堆（数组）
+ * @param  {Arry} list  待调整的二叉堆（数组）
  */
 function upAdjust(list) {
     let childIndex = list.length - 1;
@@ -22,7 +22,7 @@ function upAdjust(list) {
 
 /**
  * 下沉操作
- * @param  {Array} list        二叉堆
+ * @param  {Array} list   二叉堆
  */
 function downAdjust(list) {
     const length = list.length;
