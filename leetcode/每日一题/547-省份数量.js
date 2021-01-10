@@ -10,7 +10,7 @@ function createUF(n) {
     // 连通分量个数
     let count = n;
     // 表示每个点存储的父节点(一开始都指向自己)
-    const parent = new Array(n).map((val, index) => index);
+    const parent = new Array(n).fill(0).map((val, index) => index);
     // 表示以当前节点为根节点的树的节点个数
     const size = new Array(n).fill(1);
 
