@@ -46,7 +46,7 @@ function DFS2(start, isVisited, matrix) {
     for (let i = 0; i < currentRow.length; i++) {
         const val = currentRow[i];
         if (val === 1 && !isVisited[i]) {
-            DFS2(i, isVisited, matrix)
+            DFS2(i, isVisited, matrix);
         }
     }
 }
@@ -60,8 +60,8 @@ function traverse(graph) {
     const vertexs = graph.vertexs;
     const isVisited = new Map();
     for (let vertex of vertexs) {
-        if (!isVisited.get(Vertex)) {
-            DFS(vertex, isVisited)
+        if (!isVisited.get(vertex)) {
+            DFS(vertex, isVisited);
             // 这里可以做一个计算连通分量的个数
             // count++;
         }

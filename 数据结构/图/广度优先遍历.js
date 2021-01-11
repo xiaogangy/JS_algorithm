@@ -9,7 +9,7 @@
  * @param {*} isVisited 记录访问过的节点
  */
 function BFS(root, isVisited) {
-    if (!node) {
+    if (!root) {
         return;
     }
     // BFS需要队列
@@ -20,7 +20,7 @@ function BFS(root, isVisited) {
         isVisited.set(first, true);
 
         // 遍历弹出节点的所有相邻元素，然后放到队列中
-        const node = first.list;
+        let node = first.list;
         while (node) {
             if (isVisited.get(node) !== true) {
                 queue.push(node);
@@ -61,8 +61,8 @@ function traverse(graph) {
     const vertexs = graph.vertexs;
     const isVisited = new Map();
     for (let vertex of vertexs) {
-        if (!isVisited.get(Vertex)) {
-            BFS(vertex, isVisited)
+        if (!isVisited.get(vertex)) {
+            BFS(vertex, isVisited);
             // 这里可以做一个计算连通分量的个数
             // count++;
         }

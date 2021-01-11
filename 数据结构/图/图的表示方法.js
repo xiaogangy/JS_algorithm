@@ -46,7 +46,7 @@ function GraphMatrix(size) {
     // 二维矩阵
     this.matrix = new Array(size).fill(0).map(item => new Array(size).fill(0));
     // 连接两个顶点
-    this.connect = function(i, j) {
+    this.connect = function (i, j) {
         this.matrix[i][j] = 1;
     }
 }
