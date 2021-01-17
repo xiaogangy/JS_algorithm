@@ -17,7 +17,7 @@
  * @param {*} isVisited 表示节点是否访问过的数组(也可以为哈希表，此处为了一般性，为哈希表)
  */
 function DFS(root, isVisited) {
-    // 即是健壮性，又是递归出口
+    // 健壮性不能少了
     if (!root) {
         return;
     }
@@ -26,8 +26,10 @@ function DFS(root, isVisited) {
     isVisited.set(root, true);
     let node = root.list;
     // 看！下面就是个标准的决策树选择，标准的回溯算法
-    while (node !== null && isVisited.get(node) !== true) {
-        DFS(node, isVisited);
+    while (node !== null) {
+        if (isVisited.get(node) !== true) {
+            DFS(node, isVisited);
+        }
         node = node.next;
     }
 }

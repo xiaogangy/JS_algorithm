@@ -32,7 +32,7 @@ function Vertex(data) {
 }
 
 /**
- * 1. 邻接矩阵表示法
+ * 1. 邻接表表示法
  * @param {*} size 顶点的数量
  */
 function Graph(size) {
@@ -41,14 +41,17 @@ function Graph(size) {
     // 我们重点关注的是图的遍历方式，所以这里图的一些增删改查方法就不实现了
 }
 
-
+/**
+ * 2. 邻接矩阵表示
+ * @param {*} size 顶点的数量
+ */
 function GraphMatrix(size) {
     // 二维矩阵
     this.matrix = new Array(size).fill(0).map(item => new Array(size).fill(0));
     // 连接两个顶点
     this.connect = function (i, j) {
         this.matrix[i][j] = 1;
-    }
+    };
 }
 
 

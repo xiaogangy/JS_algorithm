@@ -35,7 +35,7 @@ function TreeDepth(pRoot) {
         return 0;
     }
 
-    return treeDepthCore(pRoot, 0);
+    return treeDepthCore(pRoot, -1);
 }
 
 /**

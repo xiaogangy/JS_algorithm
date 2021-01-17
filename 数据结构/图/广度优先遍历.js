@@ -44,7 +44,7 @@ function BFS2(start, isVisited, matrix) {
         console.log(first);
         isVisited[first] = true;
 
-        const row = matrix[start];
+        const row = matrix[first];
         for (let i = 0; i < row.length; i++) {
             if (isVisited[i] !== true && matrix[i] === 1) {
                 queue.push(i);

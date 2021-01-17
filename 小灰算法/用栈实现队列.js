@@ -43,7 +43,7 @@ function createQueueWithStack(length) {
 }
 
 function createStack(capacity) {
-    // 这是一个私有变量，JS没有private属性，就用这  种方式实现吧
+    // 这是一个私有变量，JS没有private属性，就用这种方式实现吧
     const arr = new Array(capacity);
     // 栈顶
     let top = -1;
