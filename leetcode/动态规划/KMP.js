@@ -15,7 +15,7 @@ function buildNext(pattern) {
     const next = [0];
     let i = 1;
     // now = next[i - 1]
-    const now = 0;
+    let now = 0;
 
     while (i < pattern.length) {
         // 如果当前指向的元素和now指向的元素相同，显然直接在前者基础上加1就可以
