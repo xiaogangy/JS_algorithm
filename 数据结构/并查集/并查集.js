@@ -28,8 +28,14 @@ function createUF(n) {
         // 根节点的parent[p] === p
         while (parent[p] !== p) {
             // 压缩路径：直接让当前节点的父节点变为原父节点的父节点
+            const tempParent = parent[p];
+            const tempP = p;
             parent[p] = parent[parent[p]];
             p = parent[p];
+            // size感觉还是要变一下(仅当变完还没到root时)
+            if (parent[p] !== p) {
+                size[tempParent] = size[tempParent] - size[tempP];
+            }
         }
         return p;
     };
