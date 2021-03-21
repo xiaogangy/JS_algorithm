@@ -123,7 +123,7 @@ function createLRUCache(limit) {
             if (Object.keys(hashMap).length === capacity) {
                 // 如果超出了缓存的大小，就把最左边的元素删掉
                 const oldKey = removeNode(head);
-                hashMap.delete(oldKey);
+                delete hashMap[oldKey];
             }
             node = new Node(key, value);
             addNode(node);

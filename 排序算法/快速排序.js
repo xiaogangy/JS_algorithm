@@ -23,6 +23,8 @@ function quickSort_draft(arr, startIndex, endIndex) {
     }
     // 进行双边循环（终止条件是left === right）
     while (left < right) {
+        // 这里其实应该先写右指针，因为如果先写左指针，就有可能判断不到最后一个元素，
+        // 参考下文的写法
         while (left < right && arr[left] <= pivot) {
             left++;
         }

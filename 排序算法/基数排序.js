@@ -31,7 +31,7 @@ function radixSort(arr) {
             let value = Math.floor((arr[j] % mod) / dev);
             countArr[value].push(arr[j]);
         }
-        // 3. 弹出统计数组中的元素，注意按照队列的顺序弹出，这样才能保证排序是稳定的
+        // 3. 弹出统计数组中的元素，注意按照队列的顺序弹出，这样才能保证排序结果是对的（可以把下面的log放开，看一下结果）
         let pos = 0; // 要覆盖原数组了
         for (let m = 0; m < countArr.length; m++) {
             let currentArr = countArr[m];
@@ -40,6 +40,7 @@ function radixSort(arr) {
                 pos++;
             }
         }
+        // console.log(arr);
     }
     return arr;
 }
