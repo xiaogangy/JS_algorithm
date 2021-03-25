@@ -47,6 +47,9 @@ function duplicate(numbers, duplication) {
  * 如果没有冲突呢，别急，先把这个待放置的值放过去，然后把原先那个位置的值拿回来，然后再继续判断当前这个位置的值是否和当前位置的
  * 索引是否相等。
  * 4. 重复这个操作，直到数组完全遍历完，或者中间遇到了重复的值
+ *
+ * 时间复杂度：O(N)，考虑每个元素放到最终应该在的位置，每个元素只放置了一次
+ * 空间复杂度：O(1)
  */
 function duplicate2(numbers, duplication) {
     if (!numbers || !numbers.length) {

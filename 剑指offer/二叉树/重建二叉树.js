@@ -24,6 +24,7 @@ function TreeNode(x) {
 function binaryTreeRecons(preOrder, inOrder) {
 
     // 如果前序遍历和中序遍历的数组为空，直接返回null
+    // 递归出口
     if (!preOrder.length || !inOrder.length) {
         return null;
     }
@@ -31,10 +32,6 @@ function binaryTreeRecons(preOrder, inOrder) {
     // 1. 从前序遍历的第一个元素拿取根节点
     const rootValue = preOrder[0];
     const root = new TreeNode(rootValue);
-    // 递归终止条件
-    if (preOrder.length === 1 && inOrder.length === 1) {
-        return root;
-    }
 
     // 2. 在中序遍历中找到根节点的位置，并统计左右子树的节点个数
     let rootPos = 0;
