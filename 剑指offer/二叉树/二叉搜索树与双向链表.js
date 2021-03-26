@@ -55,6 +55,7 @@ function inOrderTrans(root, array) {
 
 /**
  * 方法二：思路还是递归，先将左子树变成排序双向链表，再将右子树变成双向链表，然后二者和中点值连起来
+ * 这种方法，并没有利用到中序遍历，反而是后序遍历
  * @param {*} root 根节点
  * @return {*} 新的根节点
  */
@@ -66,9 +67,11 @@ function solution2(root) {
 }
 
 function recursive(root) {
+    // 空节点
     if (root === null) {
         return null;
     }
+    // 叶子节点
     if (!root.left && !root.right) {
         return {
             begin: root,
@@ -102,9 +105,11 @@ function recursiveMethod(root) {
     if (!root) {
         return null;
     }
+    // 追踪链表的头节点，JS中不像C++中可以用指针，所以在传参中一直带下去
     let head = {
         newHead: null
     };
+    // 追踪链表的尾结点
     const last = {
         val: null
     };

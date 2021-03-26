@@ -41,3 +41,21 @@ function mirror(root) {
         mirror(root.right);
     }
 }
+
+/**
+ * 上面的写法 其实很多判断条件没有必要
+ * @param {*} root 根节点
+ * @returns undefined
+ */
+function mirror_2(root) {
+    if (!root) {
+        return;
+    }
+
+    let temp = root.right;
+    root.right = root.left;
+    root.left = temp;
+
+    mirror(root.left);
+    mirror(root.right);
+}

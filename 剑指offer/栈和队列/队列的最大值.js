@@ -28,7 +28,7 @@ function push(number) {
     index++;
     // 无脑入data
     data.push(struct);
-    // 动动脑入max
+    // 动动脑入max（小于等于前面值的都会入队列）
     while (max.length && number > max[max.length - 1].value) {
         max.pop();
     }
