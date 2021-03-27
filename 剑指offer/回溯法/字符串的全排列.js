@@ -29,6 +29,7 @@ function Permutation(str) {
 
 /**
  * 对一组数字进行全排列。在一次递归中，我们需要知道当前已经有哪些字符进行了排列，还剩哪些字符还没排列，以及最终的结果数组。
+ * 记：已经做完的选择（先前做完的选择） + 当前可供的选择
  *
  * @param {*} result 用于最后保存所有排列的数组
  * @param {*} currentResult 当前这次排列中已经存入数组的字符
@@ -49,6 +50,7 @@ function permutationCore(result, currentResult, list) {
         // 选择当前元素作为填充的第一个元素
         currentResult.push(list[i]);
 
+        // 更新状态，进入下一轮递归
         const newList = [...list.slice(0, i), ...list.slice(i + 1)];
         permutationCore(result, currentResult, newList);
 
@@ -89,26 +91,34 @@ function permutationCoreImprove(list, result, modIndex, length) {
         return;
     }
 
-    // 2. 在剩余的数组元素中，依次选择一个元素，放到当前待填充的位置，然后递归下一轮
+    // 2. 从当前待填充的这位开始，后面的所有元素都是这一轮递归中可以进行的选择，前面的值表示之前的选择。
+    // 从modIndex开始，依次选择一个元素，放到当前待填充的位置，然后递归下一轮
     // i表示这一轮要找哪个元素，填充到待填充的位置，其实就是交换过去
     for (let i = modIndex; i < length; i++) {
         // 注意这里有回溯的思想，用完的东西要放回去，所以这里的写法是对称的；
         // 2.1) 交换
-        let temp = list[i];
-        list[i] = list[modIndex];
-        list[modIndex] = temp;
+        swap(list, i, modIndex);
 
         // 2.2) 当前填充的位置已经放了一个元素了，可以进行下一轮的递归了
         permutationCoreImprove(list, result, modIndex + 1, length);
 
         // 2.3) 后面的递归已经执行完，这时候要把在这一轮中出现的修改，改回去
-        temp = list[i];
-        list[i] = list[modIndex];
-        list[modIndex] = temp;
+        swap(list, i, modIndex);
     }
-
 }
 
+/**
+ * 交换数组中的两个元素
+ *
+ * @param {*} array 操作的数据
+ * @param {*} i 待交换的索引i
+ * @param {*} j 待交换的索引j
+ */
+function swap(array, i, j) {
+    const temp = array[i];
+    array[i] = array[j];
+    array[j] = temp;
+}
 
 function testFunc() {
     console.log(Permutation('aa'));

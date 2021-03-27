@@ -7,14 +7,18 @@
  * 所以这道题，可以用递归来解决。
  */
 
-function movingCount(threshhold, rows, columns) {
+function movingCount(threshold, rows, columns) {
 
     // 1. 先声明一个同等大小的二维矩阵，用来存储每个格子是否已经被访问过，访问过的因为已经参与了计数，就不用再加一了
     const isVisitedArray = new Array(rows).fill(0).map(item => new Array(columns).fill(false));
     // 2. 用递归函数计算总共可以访问的格子数之和
-    const count = movingCountCore(0, 0, rows, columns, isVisitedArray, threshhold);
+    const count = movingCountCore(0, 0, rows, columns, isVisitedArray, threshold);
+    // 第二种写法
+    const result = {number: 0};
+    const isVisited = new Array(rows).fill(0).map(item => new Array(columns).fill(false));
+    const count_2 = movingCountCore_2(0, 0, rows, columns, isVisited, threshold, result)
 
-    return count;
+    return {count, count_2: result.number};
 
 }
 
@@ -26,29 +30,46 @@ function movingCount(threshhold, rows, columns) {
  * @param {*} rows 棋盘的行数
  * @param {*} columns 棋盘的列数
  * @param {*} isVisitedArray 格子是否被访问过的数组
- * @param {*} threshhold k值
+ * @param {*} threshold k值
  * @return {number} 返回数量
  */
-function movingCountCore(x, y, rows, columns, isVisitedArray, threshhold) {
+function movingCountCore(x, y, rows, columns, isVisitedArray, threshold) {
 
     // 来解释一下这个递归，这个递归的终止条件就是当发现一个点不可访问，就结束了。如果可以访问，那么就进入子递归，并在之前的count上加1
     let count = 0;
 
-    if (checkIsValid(x, y, rows, columns, isVisitedArray, threshhold)) {
+    if (checkIsValid(x, y, rows, columns, isVisitedArray, threshold)) {
         isVisitedArray[x][y] = true;
-        count = 1 + movingCountCore(x - 1, y, rows, columns, isVisitedArray, threshhold)
-            + movingCountCore(x + 1, y, rows, columns, isVisitedArray, threshhold)
-            + movingCountCore(x, y - 1, rows, columns, isVisitedArray, threshhold)
-            + movingCountCore(x, y + 1, rows, columns, isVisitedArray, threshhold);
+        count = 1 + movingCountCore(x - 1, y, rows, columns, isVisitedArray, threshold)
+            + movingCountCore(x + 1, y, rows, columns, isVisitedArray, threshold)
+            + movingCountCore(x, y - 1, rows, columns, isVisitedArray, threshold)
+            + movingCountCore(x, y + 1, rows, columns, isVisitedArray, threshold);
     }
 
     return count;
 
 }
 
+// 回看这道题的解法，感觉写的不那么的“典型回溯”，回溯是要让自己站在选择的路口上，自己去尝试，尝试完一种选择后，就换另外一种选择
+// 充分记住，回溯的两个关键点：已经做出的选择 + 可以进行的选择
+function movingCountCore_2(x, y, rows, columns, isVisited, threshold, count) {
+    const isValid = checkIsValid(x, y, rows, columns, isVisited, threshold);
+    if (isValid) {
+        // 先把当前这次的选择要做的事情做了，每次发现当前节点可进入的时候，就把count的值更新
+        // 这也是这个回溯和上面写法的不同，这种写法是我带着所有的状态不停的游历各种选择
+        isVisited[x][y] = true;
+        count.number++;
+        // 面临四种选择：上下左右
+        movingCountCore_2(x - 1, y, rows, columns, isVisited, threshold, count);
+        movingCountCore_2(x + 1, y, rows, columns, isVisited, threshold, count);
+        movingCountCore_2(x, y - 1, rows, columns, isVisited, threshold, count);
+        movingCountCore_2(x, y + 1, rows, columns, isVisited, threshold, count);
+    }
+}
+
 // 判断当前格子是否可访问
-function checkIsValid(x, y, rows, columns, isVisitedArray, threshhold) {
-    if (x >= 0 && x < rows && y >= 0 && y < columns && !isVisitedArray[x][y] && (getDigitSum(x) + getDigitSum(y)) <= threshhold) {
+function checkIsValid(x, y, rows, columns, isVisitedArray, threshold) {
+    if (x >= 0 && x < rows && y >= 0 && y < columns && !isVisitedArray[x][y] && (getDigitSum(x) + getDigitSum(y)) <= threshold) {
         return true;
     }
     return false;
