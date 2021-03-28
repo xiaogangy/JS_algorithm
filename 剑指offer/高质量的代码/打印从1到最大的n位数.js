@@ -20,8 +20,8 @@
  */
 function solution1(n) {
 
-    // 先声明一个长度为n+1的数组（最高位会产生进位），逆序存储大整数（更符合我们对数组的操作）
-    const arrNumber = new Array(n + 1).fill(0);
+    // 先声明一个长度为n位数组，逆序存储大整数（更符合我们对数组的操作）
+    const arrNumber = new Array(n).fill(0);
 
     // 开始不断加1，如果合法就把它输出
     while (increment(arrNumber)) {
@@ -31,16 +31,16 @@ function solution1(n) {
 
 /**
  * 为了逻辑清晰，把自增1的操作抽离出来
+ * 注意：数组是倒着存大数的，即第一个元素是个位，第二个元素是十位……
  * @param {*} arrNumber 待自增1的数组大数
  * @return {boolean} 返回一个本次加1操作是否合法的标识
  */
 function increment(arrNumber) {
-    // 数组整数的总位数，注意比真实长度多一位，为了判断最高位进位用的
     const length = arrNumber.length;
 
     // 先判断一下这次是不是还要加1，或者说这次加1还合法不
     let needIncrement = false;
-    for (let t = length - 2; t >= 0; t--) {
+    for (let t = length - 1; t >= 0; t--) {
         if (arrNumber[t] === 9) {
             continue;
         } else {
@@ -55,7 +55,7 @@ function increment(arrNumber) {
 
     // 2. 还可以加1，修改输入值arrNumber
     let carry = 0; // 保存进位
-    for (let i = 0; i < length - 1; i++) {
+    for (let i = 0; i < length; i++) {
         let current = arrNumber[i] + carry;
 
         // 只在最低位加1
@@ -94,12 +94,12 @@ function printResult(arrNumber) {
     }
 
     const value = arrNumber.slice(0, lastZeroIndex + 1).reverse().join('');
-    console.log(value);
+    !!value && console.log(value);
 }
 
 
 /**
- * 解法2：利用递归
+ * 解法2：利用递归，本质是回溯算法
  * 分析一下，我们在第一位（最高位），可以填充0~9的每个数值，填充完之后就是第二位……
  * 后续的操作和前面一模一样，只是输入值规模变小了，所以可以用递归来解决问题。
  *
@@ -110,10 +110,7 @@ function solution2(n) {
     // 声明数组存储各位，这次就不要长度多加1了，因为没有进位一说
     const arrNumber = new Array(n).fill(0);
 
-    for (let i = 0; i <= 9; i++) {
-        arrNumber[0] = i;
-        recursive(arrNumber, n, 1);
-    }
+    recursive(arrNumber, n, 0);
 }
 
 /**
@@ -149,12 +146,12 @@ function recursivePrint(arrNumber) {
     }
 
     const value = arrNumber.slice(firstNonZeroIndex).join('');
-    console.log(value);
+    !!value && console.log(value);
 }
 
 function testFunc() {
-    const n = 3;
+    const n = 2;
     solution1(n);
-    solution2(n);
+    // solution2(n);
 }
 testFunc();
