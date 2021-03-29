@@ -17,8 +17,10 @@
 function Node(value) {
     this.val = value;
     this.next = null;
+    this.pre = null;
 }
 
+// date: 2021/03/29，改成双向链表，方便找前后节点
 function createCycle(n) {
     const head = new Node(0);
     let pre = head;
@@ -26,11 +28,13 @@ function createCycle(n) {
 
     for (let i = 1; i < n; i++) {
         current = new Node(i);
+        current.pre = pre;
         pre.next = current;
         pre = current;
     }
     // 不要忘了最后把尾节点指向头结点
     pre.next = head;
+    head.pre = pre;
 
     return head;
 }
@@ -45,23 +49,21 @@ function solution1(n, m) {
     let cycle = createCycle(n);
 
     // 2. 循环删除，直到节点数为1
-    // 因为删除节点的缘故，要声明一个指针指向待删除节点的前一个节点
-    let pre = null;
     let toBeDel = cycle;
 
     let i = n;
     while (i > 1) {
-        // 删除第m个节点，所以要走m-1步；但是又为了拿到第m个节点的前一个节点，所以循环里再少走一步
-        let j = 0;
-        while (j + 1 < m - 1) {
+        // 表示当前是第几个节点
+        let j = 1;
+        while (j < m) {
             toBeDel = toBeDel.next;
             j++;
         }
-        pre = toBeDel;
-        toBeDel = toBeDel.next;
-
         // 删除节点
+        const pre = toBeDel.pre;
         pre.next = toBeDel.next;
+        toBeDel.pre = null;
+        toBeDel.next = null;
 
         // 更新一些参数
         --i;
