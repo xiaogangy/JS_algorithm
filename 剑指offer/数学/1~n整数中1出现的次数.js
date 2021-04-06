@@ -71,7 +71,7 @@ function numbersOf1(arr) {
 }
 
 function testFunc() {
-    const number = 15;
+    const number = 101;
     console.log(solution(number));
 }
 testFunc();
