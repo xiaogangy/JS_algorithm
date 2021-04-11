@@ -16,9 +16,6 @@
 
 // 方法2：后续遍历，返回当前树的最大值、最小值、是否合法
 function isValidBST2(root) {
-    if (!root) {
-        return false;
-    }
     return backTraverse(root).isValid;
 }
 
@@ -30,29 +27,34 @@ function backTraverse(root) {
             isValid: true
         };
     }
+    // 叶子节点
+    if (!root.left && !root.right) {
+        return {
+            max: root.val,
+            min: root.val,
+            isValid: true
+        };
+    }
     // 先遍历左子树
     const left = backTraverse(root.left);
     // 再遍历右子树
     const right = backTraverse(root.right);
     // 和当前节点判断
-    const leftMax = left.max;
-    const rightMin = right.min;
+    const {max: leftMax, min: leftMin, isValid: leftValid} = left;
+    const {max: rightMax, min: rightMin, isValid: rightValid} = right;
     const leftTrue = leftMax === null || root.val > leftMax;
-    const rightValid = rightMin === null || root.val < rightMin;
-    const isValid = leftTrue && rightValid;
+    const rightTrue = rightMin === null || root.val < rightMin;
+    const isValid = leftValid && rightValid && leftTrue && rightTrue;
 
     return {
-        min: left.min,
-        max: right.max,
+        min: leftMin === null ? root.val : Math.min(leftMin, root.val),
+        max: rightMax === null ? root.val : Math.max(rightMax, root.val),
         isValid
     };
 }
 
 // 方法3：前序遍历。带着最大值和最小值往下钻，当然还是得先确定这个函数返回啥，肯定是返回true或者false咯
 function isValidBST3(root) {
-    if (!root) {
-        return false;
-    }
     return preTraverse(root, null, null);
 }
 
@@ -70,7 +72,7 @@ function preTraverse(root, max, min) {
         return false;
     }
 
-    return preTraverse(root.left, root, min) && preTraverse(root.right, max, root);
+    return preTraverse(root.left, root.val, min) && preTraverse(root.right, max, root.val);
 }
 
 function Node(value) {
